@@ -5,34 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art of Beauty | Premium Beauty Salon in Saint Petersburg</title>
     
-    <!-- Подключение премиальных шрифтов -->
+    <!-- Шрифты: Oswald для заголовков и текста, Playfair для акцентов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 
     <style>
-        /* --- БЛАГОРОДНАЯ ПАЛИТРА --- */
+        /* --- ПРЕМИАЛЬНАЯ ПАЛИТРА --- */
         :root {
-            --bg-deep: #0b0c0e; 
-            --bg-card: rgba(22, 24, 28, 0.6); 
-            --border-glass: rgba(255, 255, 255, 0.06);
-            --border-highlight: rgba(255, 255, 255, 0.12);
+            --bg-deep: #1a1a1a; 
+            --bg-card: rgba(30, 30, 30, 0.7); 
+            --border-glass: rgba(201, 168, 124, 0.2); 
             
-            --text-main: #f0f2f5;
-            --text-muted: #9ba3af;
+            --text-main: #f5f5f5;
+            --text-muted: #a0a0a0;
             
-            --accent-green: #2d6a5c; 
-            --accent-green-hover: #387d6d;
-            --accent-green-glow: rgba(45, 106, 92, 0.3);
+            /* Золото */
+            --gold-main: #d4af37; 
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa8c2c;
             
-            --accent-gold: #c8b195;
-            --accent-gold-hover: #d6c1a8;
-            --accent-gold-glow: rgba(200, 177, 149, 0.2);
-            
-            /* Шрифты */
             --font-heading: 'Oswald', sans-serif;
-            --font-body: 'Oswald', sans-serif; /* Используем Oswald и для текста для единства */
-            --font-accent: 'Playfair Display', serif; /* Рукописный/курсивный акцент */
+            --font-body: 'Oswald', sans-serif;
+            --font-accent: 'Playfair Display', serif;
         }
 
         /* --- БАЗА --- */
@@ -41,48 +36,73 @@
         body {
             background-color: var(--bg-deep);
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(45, 106, 92, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(200, 177, 149, 0.04) 0%, transparent 40%);
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
             color: var(--text-main);
             font-family: var(--font-body);
-            font-weight: 300; /* Oswald легкий для текста */
+            font-weight: 300;
             line-height: 1.6;
             min-height: 100vh;
             background-attachment: fixed;
             overflow-x: hidden;
+            position: relative;
         }
         
-        /* Заголовки - Oswald */
+        /* Фоновые искры */
+        .bg-sparkle {
+            position: absolute;
+            color: var(--gold-main);
+            opacity: 0.2;
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: float 6s infinite ease-in-out;
+            z-index: 1;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(15deg); }
+        }
+
         h1, h2, h3 { 
             font-family: var(--font-heading); 
-            font-weight: 400; 
-            letter-spacing: 1px;
+            font-weight: 500; 
             text-transform: uppercase;
         }
-        h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.1; }
-        h2 { font-size: 1.6rem; margin-bottom: 2rem; text-align: center; position: relative; padding-bottom: 15px; letter-spacing: 3px; }
         
-        /* Золотое подчеркивание */
-        h2::after { 
-            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); 
-            width: 40px; height: 1px; 
-            background: var(--accent-gold); 
-            box-shadow: 0 0 8px var(--accent-gold-glow); 
+        /* Огромный золотой заголовок */
+        h1 { 
+            font-size: 4.5rem; 
+            line-height: 0.9; 
+            margin-bottom: 1.5rem; 
+            background: linear-gradient(to right, var(--gold-light), var(--gold-main), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+        
+        h2 { 
+            font-size: 2rem; 
+            margin-bottom: 2.5rem; 
+            text-align: center; 
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            position: relative;
         }
         
         p { color: var(--text-muted); margin-bottom: 1rem; font-weight: 300; font-size: 1.05rem; }
         a { color: inherit; text-decoration: none; }
 
-        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
 
-        /* --- АКЦЕНТНЫЙ РУКОПИСНЫЙ ШРИФТ --- */
         .accent-text {
             font-family: var(--font-accent);
             font-style: italic;
-            text-transform: none; /* Отменяем капс для рукописного */
-            color: var(--accent-gold);
+            text-transform: none;
+            color: var(--gold-light);
             font-weight: 400;
             letter-spacing: 0;
+            font-size: 1.1em;
         }
 
         /* --- АНИМАЦИЯ ПОЯВЛЕНИЯ --- */
@@ -96,195 +116,251 @@
             transform: translateY(0);
         }
 
-        /* --- УСИЛЕННОЕ МАТОВОЕ СТЕКЛО --- */
+        /* --- МАТОВОЕ СТЕКЛО --- */
         .glass {
             background: var(--bg-card);
-            backdrop-filter: blur(35px) saturate(150%);
-            -webkit-backdrop-filter: blur(35px) saturate(150%);
+            backdrop-filter: blur(20px) saturate(120%);
+            -webkit-backdrop-filter: blur(20px) saturate(120%);
             border: 1px solid var(--border-glass);
-            border-radius: 8px; /* Строгие углы */
-            padding: 2.5rem;
+            border-radius: 12px;
+            padding: 2rem;
             box-shadow: 
-                0 15px 35px rgba(0,0,0,0.5), 
-                inset 0 1px 0 rgba(255,255,255,0.03);
-            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+                0 15px 35px rgba(0,0,0,0.6), 
+                inset 0 1px 0 rgba(255,255,255,0.05),
+                0 0 20px rgba(212, 175, 55, 0.05);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .glass::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.03) 50%, transparent 60%);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+        
         .glass:hover { 
-            border-color: var(--border-highlight); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
-            transform: translateY(-2px);
+            border-color: rgba(212, 175, 55, 0.5); 
+            transform: translateY(-3px);
         }
 
         /* --- КНОПКИ --- */
         .btn {
             display: inline-block;
             padding: 14px 32px;
-            background: transparent;
-            color: var(--accent-gold);
-            border: 1px solid var(--accent-gold);
-            border-radius: 2px;
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
+            color: #111;
+            border-radius: 4px;
             font-family: var(--font-heading);
-            font-weight: 400;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.4s ease;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            border: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
         .btn:hover { 
-            background: var(--accent-gold); 
-            color: var(--bg-deep);
-            box-shadow: 0 0 20px var(--accent-gold-glow);
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-main));
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
         }
         
-        .btn-solid {
-            background: var(--accent-green);
-            color: #fff;
-            border: 1px solid var(--accent-green);
+        .btn-outline {
+            background: transparent;
+            color: var(--gold-main);
+            border: 1px solid var(--gold-main);
+            box-shadow: none;
         }
-        .btn-solid:hover {
-            background: var(--accent-green-hover);
-            border-color: var(--accent-green-hover);
-            box-shadow: 0 0 20px var(--accent-green-glow);
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-light);
         }
 
         /* --- НАВИГАЦИЯ --- */
         header {
             padding: 1.5rem 0;
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(11, 12, 14, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-glass);
+            position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
         }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
         .logo { 
             font-family: var(--font-heading); 
             font-weight: 400; 
             font-size: 1.2rem; 
-            color: var(--accent-gold); 
+            color: var(--gold-main); 
             letter-spacing: 4px; 
             text-transform: uppercase;
         }
         .nav-links { display: flex; gap: 2.5rem; font-family: var(--font-heading); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 300; }
         .nav-links a { color: var(--text-muted); transition: color 0.3s; }
-        .nav-links a:hover { color: var(--accent-gold); }
+        .nav-links a:hover { color: var(--gold-main); }
 
         /* --- HERO --- */
-        .hero { display: flex; align-items: center; gap: 4rem; padding: 6rem 0; }
-        .hero-content { flex: 1; }
+        .hero { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            min-height: 90vh; 
+            padding-top: 100px;
+            gap: 2rem;
+        }
+        .hero-content { flex: 1; position: relative; z-index: 3; }
         
-        /* Слово "безупречной" рукописным шрифтом */
-        .hero-content h1 .accent-text { 
-            font-size: 3.5rem; 
-            display: inline-block; 
-            line-height: 0.8;
-            margin-top: 5px;
+        .hero-content p { 
+            font-size: 1.1rem; 
+            max-width: 80%; 
+            border-left: 2px solid var(--gold-main);
+            padding-left: 15px;
+            margin-bottom: 2rem;
         }
         
-        .hero-content p { font-size: 1.1rem; max-width: 90%; }
-        .hero-buttons { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
-        .hero-image { flex: 1; display: flex; justify-content: center; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
         
-        .hero-image .glass {
-            width: 100%; max-width: 380px; aspect-ratio: 4/5;
-            display: flex; flex-direction: column; justify-content: flex-end;
-            position: relative; overflow: hidden;
-            padding: 0;
-            border: 1px solid rgba(200, 177, 149, 0.2);
-        }
-        
-        .hero-bg-img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .hero-image .glass:hover .hero-bg-img { transform: scale(1.05); }
-        
-        .hero-image-overlay {
+        .hero-image { 
+            flex: 1; 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-end;
             position: relative;
-            z-index: 1;
-            background: linear-gradient(to top, rgba(11, 12, 14, 0.95) 0%, rgba(11, 12, 14, 0.3) 60%, transparent 100%);
-            padding: 2rem 1.5rem 1.5rem;
-            text-align: center;
         }
-        .hero-image h3 { font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--accent-gold); font-weight: 300; letter-spacing: 1px; }
-        .hero-image p { font-size: 0.8rem; margin: 0; letter-spacing: 1px; text-transform: uppercase; font-family: var(--font-heading); }
+        
+        .hero-image img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 150px 150px 0 0; /* Арка */
+            border-bottom: 3px solid var(--gold-main);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(212, 175, 55, 0.1);
+            z-index: 2;
+            position: relative;
+        }
 
-        /* --- СЕТКИ --- */
-        section { padding: 5rem 0; }
+        .sparkle-decor {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--gold-main);
+            text-shadow: 0 0 10px var(--gold-main);
+            opacity: 0.6;
+            z-index: 3;
+            animation: pulse 3s infinite alternate;
+        }
+        .sparkle-1 { top: 10%; left: 0; animation-delay: 0s; }
+        .sparkle-2 { top: 40%; right: 10%; font-size: 1rem; animation-delay: 1s; }
+        .sparkle-3 { bottom: 20%; left: -20px; font-size: 1.5rem; animation-delay: 2s; }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* --- СЕКЦИИ И СЕТКИ --- */
+        section { padding: 5rem 0; position: relative; z-index: 2; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         
+        /* --- БЛОК "ПРОГРАММА" --- */
+        .program-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .program-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .program-card h3 {
+            color: var(--gold-light);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .program-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .program-card li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        
+        .program-card li::before {
+            content: '•';
+            color: var(--gold-main);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
         /* --- КАРТОЧКИ УСЛУГ --- */
         .service-card { 
             text-align: center; padding: 0; position: relative; overflow: hidden; 
-            display: flex; flex-direction: column; justify-content: flex-end; min-height: 320px;
-            border-radius: 8px;
+            display: flex; flex-direction: column; justify-content: flex-end; min-height: 350px;
         }
         .service-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: 0;
             transition: transform 0.8s ease;
-            filter: brightness(0.7);
+            filter: brightness(0.6) contrast(1.1);
         }
-        .service-card:hover .service-bg { transform: scale(1.08); filter: brightness(0.85); }
+        .service-card:hover .service-bg { transform: scale(1.05); filter: brightness(0.8) contrast(1.1); }
         
         .service-content {
             position: relative; z-index: 1;
-            background: linear-gradient(to top, rgba(11, 12, 14, 0.95) 0%, rgba(11, 12, 14, 0.5) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(20, 20, 20, 0.95) 0%, rgba(20, 20, 20, 0.6) 60%, transparent 100%);
             padding: 2.5rem 1.5rem 1.5rem; width: 100%;
-            transition: transform 0.4s ease;
         }
         
-        .service-card h3 { color: var(--text-main); margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 2px; }
-        .service-card p { font-size: 0.85rem; margin: 0; color: var(--text-muted); font-family: var(--font-body); }
+        .service-card h3 { color: var(--gold-light); margin-bottom: 0.5rem; font-size: 1.2rem; letter-spacing: 2px; }
 
         /* --- КОНТАКТЫ --- */
         .contact-info p { margin-bottom: 1rem; font-size: 1rem; }
-        .contact-info strong { color: var(--text-main); font-weight: 400; font-family: var(--font-heading); letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;}
-        .contact-info a { color: var(--accent-gold); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
-        .contact-info a:hover { border-color: var(--accent-gold); }
+        .contact-info strong { color: var(--gold-light); font-weight: 400; font-family: var(--font-heading); letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;}
+        .contact-info a { color: var(--gold-main); transition: color 0.3s; }
+        .contact-info a:hover { color: var(--gold-light); }
         
         .map-container {
-            margin-top: 2rem; border-radius: 4px; overflow: hidden;
+            margin-top: 2rem; border-radius: 8px; overflow: hidden;
             border: 1px solid var(--border-glass); box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .map-container img { width: 100%; height: auto; display: block; filter: grayscale(0.2) contrast(1.1); }
-
-        /* Оценка рейтинга рукописным шрифтом */
-        .rating-number {
-            font-family: var(--font-accent);
-            font-style: italic;
-            font-size: 4rem;
-            color: var(--accent-gold);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
+        .map-container img { width: 100%; height: auto; display: block; filter: grayscale(0.5) contrast(1.2); }
 
         /* --- МОДАЛЬНОЕ ОКНО --- */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 6, 8, 0.85); backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(10px);
             z-index: 1000; justify-content: center; align-items: center; padding: 20px;
         }
         .modal-overlay.active { display: flex; }
         .modal-content {
-            background: rgba(22, 24, 28, 0.9); backdrop-filter: blur(40px);
-            border: 1px solid var(--border-highlight); border-radius: 8px; 
+            background: #1c1c1c; border: 1px solid var(--gold-main); border-radius: 12px; 
             width: 100%; max-width: 550px; padding: 2.5rem; position: relative; 
             max-height: 90vh; overflow-y: auto;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.2);
         }
         .modal-close {
             position: absolute; top: 15px; right: 20px; background: none; border: none; 
-            color: var(--text-muted); font-size: 1.8rem; cursor: pointer; line-height: 1; transition: color 0.2s;
+            color: var(--gold-main); font-size: 1.8rem; cursor: pointer; line-height: 1; transition: color 0.2s;
         }
-        .modal-close:hover { color: var(--accent-gold); }
-        .modal-content h3 { margin-bottom: 1.5rem; text-align: center; color: var(--accent-gold); font-weight: 300; letter-spacing: 2px; }
+        .modal-close:hover { color: var(--gold-light); }
+        .modal-content h3 { margin-bottom: 1.5rem; text-align: center; color: var(--gold-light); font-weight: 400; letter-spacing: 2px; }
 
-        .form-section-title { font-family: var(--font-heading); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-gold); margin: 1.5rem 0 0.8rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 8px; font-weight: 300; }
+        .form-section-title { font-family: var(--font-heading); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-main); margin: 1.5rem 0 0.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 8px; font-weight: 300; }
 
         .checkbox-group { display: flex; flex-direction: column; gap: 0.6rem; }
         .checkbox-label {
@@ -293,8 +369,8 @@
             cursor: pointer; transition: all 0.3s; font-size: 0.95rem; background: rgba(255,255,255,0.02);
             color: var(--text-muted);
         }
-        .checkbox-label:hover { border-color: var(--accent-green); color: var(--text-main); }
-        .checkbox-label input[type="checkbox"] { accent-color: var(--accent-green); width: 18px; height: 18px; cursor: pointer; }
+        .checkbox-label:hover { border-color: var(--gold-main); color: var(--text-main); background: rgba(212, 175, 55, 0.05); }
+        .checkbox-label input[type="checkbox"] { accent-color: var(--gold-main); width: 18px; height: 18px; cursor: pointer; }
 
         .time-select, .phone-input {
             width: 100%; padding: 14px 15px; background: rgba(0,0,0,0.4);
@@ -302,38 +378,45 @@
             color: var(--text-main); font-family: var(--font-body); font-weight: 300; font-size: 1rem;
             outline: none; margin-top: 0.5rem; transition: border-color 0.3s;
         }
-        .time-select:focus, .phone-input:focus { border-color: var(--accent-gold); }
-        .time-select option { background: #16181c; color: #fff; }
-        .modal-submit { width: 100%; margin-top: 2rem; padding: 16px; font-size: 0.9rem; }
+        .time-select:focus, .phone-input:focus { border-color: var(--gold-main); }
+        .time-select option { background: #1c1c1c; color: #fff; }
+        .modal-submit { width: 100%; margin-top: 2rem; padding: 16px; font-size: 0.95rem; }
 
         /* --- АДАПТИВ --- */
-        @media (max-width: 850px) {
-            .hero { flex-direction: column; text-align: center; padding: 4rem 0; gap: 2rem; }
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-content p { margin: 0 auto 2rem; border-left: none; padding-left: 0; }
             .hero-buttons { justify-content: center; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-content h1 .accent-text { font-size: 2.8rem; }
-            .hero-content p { margin: 0 auto; }
-            .grid-2 { grid-template-columns: 1fr; }
+            .hero-image { margin-top: 2rem; }
+            .hero-image img { border-radius: 20px; max-width: 100%; }
+            
+            h1 { font-size: 3.5rem; }
+            .grid-2, .program-grid { grid-template-columns: 1fr; }
             .grid-3 { grid-template-columns: 1fr 1fr; }
             .nav-links { display: none; }
         }
         @media (max-width: 550px) {
             .grid-3 { grid-template-columns: 1fr; }
-            h2 { font-size: 1.4rem; }
+            h1 { font-size: 2.8rem; }
             .glass { padding: 1.5rem; }
-            .hero-content h1 { font-size: 2rem; }
-            .hero-content h1 .accent-text { font-size: 2.3rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Фоновые искры -->
+    <div class="bg-sparkle" style="top: 15%; left: 5%;">✦</div>
+    <div class="bg-sparkle" style="top: 30%; right: 10%; animation-delay: 2s;">✧</div>
+    <div class="bg-sparkle" style="top: 60%; left: 15%; animation-delay: 4s;">✦</div>
+    <div class="bg-sparkle" style="top: 80%; right: 5%; animation-delay: 1s;">✧</div>
 
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">Искусство Красоты</a>
             <nav class="nav-links">
                 <a href="#about">О нас</a>
-                <a href="#services">Услуги</a>
+                <a href="#program">Программа</a>
+                <a href="#services">Галерея</a>
                 <a href="#contacts">Контакты</a>
             </nav>
         </div>
@@ -343,21 +426,18 @@
         <!-- HERO -->
         <section class="hero">
             <div class="hero-content reveal">
-                <h1>Искусство быть<br><span class="accent-text">безупречной</span></h1>
-                <p>Салон на Ольги Форш. Пространство, где профессиональный подход встречается с атмосферой абсолютного комфорта.</p>
+                <h1>ИСКУССТВО<br>КРАСОТЫ</h1>
+                <p>Авторский подход к вашему стилю. Пространство на Ольги Форш, где профессиональный уход встречается с атмосферой абсолютного комфорта.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-solid" onclick="openModal()">Записаться</button>
-                    <a href="#services" class="btn">Услуги</a>
+                    <button class="btn" onclick="openModal()">Записаться</button>
+                    <a href="#program" class="btn btn-outline">Программа</a>
                 </div>
             </div>
             <div class="hero-image reveal">
-                <div class="glass">
-                    <img src="https://salonvolos.spb.ru/images/uslugi/strizhka/bob/bob-9.jpg" alt="Стрижка Боб" class="hero-bg-img">
-                    <div class="hero-image-overlay">
-                        <h3>ул. Ольги Форш, 13к1</h3>
-                        <p>Ежедневно 10:00–20:00</p>
-                    </div>
-                </div>
+                <img src="https://salonvolos.spb.ru/images/uslugi/strizhka/bob/bob-9.jpg" alt="Мастер салона">
+                <div class="sparkle-decor sparkle-1">✦</div>
+                <div class="sparkle-decor sparkle-2">✧</div>
+                <div class="sparkle-decor sparkle-3">✦</div>
             </div>
         </section>
 
@@ -365,42 +445,83 @@
         <section id="about">
             <div class="grid-2">
                 <div class="glass reveal">
-                    <h3 style="color: var(--accent-gold); margin-bottom: 1rem; font-weight: 400; letter-spacing: 2px;">Об атмосфере</h3>
+                    <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 400; letter-spacing: 2px;">Об атмосфере</h3>
                     <p>Гости отмечают уютный интерьер и внимательных мастеров. Мы находимся в Калининском районе, недалеко от метро Гражданский проспект.</p>
                     <p>Здесь можно не просто подстричься, но и отдохнуть от городской суеты. Работаем ежедневно с 10:00 до 20:00.</p>
                 </div>
                 <div class="glass reveal" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                    <div class="rating-number">4.9</div>
-                    <p style="margin: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-family: var(--font-heading);">Средняя оценка <br> на основе 232 отзывов</p>
+                    <div style="font-family: var(--font-accent); font-style: italic; font-size: 4rem; color: var(--gold-main); line-height: 1; margin-bottom: 0.5rem;">4.9</div>
+                    <p style="margin: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-family: var(--font-heading); color: var(--text-main);">Средняя оценка <br> на основе 232 отзывов</p>
                 </div>
             </div>
         </section>
 
-        <!-- УСЛУГИ -->
+        <!-- БЛОК "ПРОГРАММА" -->
+        <section id="program">
+            <h2 class="reveal">Наши услуги</h2>
+            <div class="program-grid">
+                <div class="glass program-card reveal">
+                    <h3>Парикмахерские услуги</h3>
+                    <ul>
+                        <li>Женские и мужские стрижки</li>
+                        <li>Сложное окрашивание (AirTouch, шатуш)</li>
+                        <li>Уходы и реконструкция волос</li>
+                        <li>Вечерние и свадебные укладки</li>
+                    </ul>
+                </div>
+                
+                <div class="glass program-card reveal">
+                    <h3>Маникюр и педикюр</h3>
+                    <ul>
+                        <li>Аппаратный маникюр</li>
+                        <li>Покрытие гель-лаком</li>
+                        <li>Наращивание и коррекция</li>
+                        <li>СПА-уход для рук и ног</li>
+                    </ul>
+                </div>
+
+                <div class="glass program-card reveal">
+                    <h3>Косметология</h3>
+                    <ul>
+                        <li>Чистка лица (УЗ, механическая)</li>
+                        <li>Пилинги и уходовые процедуры</li>
+                        <li>Массаж лица</li>
+                        <li>Коррекция бровей и ресниц</li>
+                    </ul>
+                </div>
+
+                <div class="glass program-card reveal" style="display: flex; justify-content: center; align-items: center; text-align: center; border-color: var(--gold-main);">
+                    <div>
+                        <h3 style="border: none; color: var(--gold-light); font-size: 1.4rem;">Специальное предложение</h3>
+                        <p style="color: var(--text-main); font-size: 1rem; margin-top: 1rem;">При записи на две и более услуги — <span class="accent-text" style="font-size: 1.3rem;">скидка 15%</span></p>
+                        <button class="btn" onclick="openModal()" style="margin-top: 1.5rem;">Воспользоваться</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ГАЛЕРЕЯ -->
         <section id="services">
-            <h2 class="reveal">Наши Услуги</h2>
+            <h2 class="reveal">Галерея</h2>
             <div class="grid-3">
                 <div class="glass service-card reveal">
                     <img src="https://i.pinimg.com/236x/9a/ab/49/9aab4928df5bde4eba57612af83d4f36.jpg" alt="Парикмахерские услуги" class="service-bg">
                     <div class="service-content">
-                        <h3>Парикмахерские услуги</h3>
-                        <p>Стрижки, укладки, окрашивание</p>
+                        <h3>Волосы</h3>
                     </div>
                 </div>
                 
                 <div class="glass service-card reveal">
                     <img src="https://i.pinimg.com/1200x/e2/9e/02/e29e029f74ca5ec04692e0bca3b7ba7f.jpg" alt="Маникюр и педикюр" class="service-bg">
                     <div class="service-content">
-                        <h3>Маникюр и педикюр</h3>
-                        <p>Аппаратный маникюр, покрытие, уход</p>
+                        <h3>Ногти</h3>
                     </div>
                 </div>
 
                 <div class="glass service-card reveal">
                     <img src="https://i.pinimg.com/736x/b8/a5/ff/b8a5ff35e8dfeb9af2df177654751df1.jpg" alt="Уход и косметология" class="service-bg">
                     <div class="service-content">
-                        <h3>Уход и косметология</h3>
-                        <p>Процедуры для лица и тела</p>
+                        <h3>Лицо</h3>
                     </div>
                 </div>
             </div>
@@ -421,15 +542,15 @@
                     </div>
                 </div>
                 <div class="glass reveal" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                    <h3 style="margin-bottom: 1rem; font-weight: 300; letter-spacing: 2px;">Остались вопросы?</h3>
+                    <h3 style="margin-bottom: 1rem; font-weight: 400; letter-spacing: 2px; color: var(--gold-light);">Остались вопросы?</h3>
                     <p>Позвоните нам или оставьте заявку, и мы перезвоним для подтверждения времени.</p>
-                    <button class="btn btn-solid" onclick="openModal()" style="margin-top: 1.5rem;">Оставить заявку</button>
+                    <button class="btn" onclick="openModal()" style="margin-top: 1.5rem;">Оставить заявку</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid var(--border-glass); color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1px; font-family: var(--font-heading); text-transform: uppercase;">
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid rgba(212, 175, 55, 0.2); color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1px; font-family: var(--font-heading); text-transform: uppercase; position: relative; z-index: 2;">
         <div class="container">
             <p style="margin: 0;">© 2026 Салон «Искусство Красоты» · ул. Ольги Форш, 13к1</p>
         </div>
@@ -478,7 +599,7 @@
                 <div class="form-section-title">Ваш номер телефона</div>
                 <input type="tel" class="phone-input" placeholder="+7 (___) ___-__-__" required>
 
-                <button type="submit" class="btn btn-solid modal-submit">Отправить заявку</button>
+                <button type="submit" class="btn modal-submit">Отправить заявку</button>
             </form>
         </div>
     </div>
