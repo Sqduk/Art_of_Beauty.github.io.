@@ -5,21 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art of Beauty | Premium Beauty Salon in Saint Petersburg</title>
     <style>
-        /* --- ПЕРЕМЕННЫЕ (Приглушенный неон + Матовое стекло) --- */
+        /* --- ПЕРЕМЕННЫЕ --- */
         :root {
             --bg-deep: #0a0c10;
             --bg-card: rgba(18, 22, 28, 0.65);
             --border-glass: rgba(255, 255, 255, 0.08);
-            
             --text-main: #e6edf3;
             --text-muted: #8b949e;
-            
-            /* Приглушенный неон */
             --neon-teal: #3a9e8f; 
             --neon-teal-glow: rgba(58, 158, 143, 0.4);
             --neon-gold: #c9a87c;
             --neon-gold-glow: rgba(201, 168, 124, 0.3);
-            
             --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -30,13 +26,13 @@
             background-color: var(--bg-deep);
             background-image: 
                 radial-gradient(circle at 15% 20%, rgba(58, 158, 143, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(201, 168, 124, 0.06) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(15, 20, 30, 1) 0%, #0a0c10 100%);
+                radial-gradient(circle at 85% 80%, rgba(201, 168, 124, 0.06) 0%, transparent 40%);
             color: var(--text-main);
             font-family: var(--font-main);
             line-height: 1.6;
             min-height: 100vh;
             background-attachment: fixed;
+            overflow-x: hidden;
         }
         
         h1, h2, h3 { font-weight: 500; letter-spacing: 0.5px; }
@@ -53,7 +49,18 @@
 
         .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        /* --- ПОЛУМАТОВОЕ СТЕКЛО --- */
+        /* --- АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- СТЕКЛО --- */
         .glass {
             background: var(--bg-card);
             backdrop-filter: blur(25px) saturate(120%);
@@ -61,9 +68,7 @@
             border: 1px solid var(--border-glass);
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 
-                0 10px 30px rgba(0,0,0,0.4),
-                inset 0 1px 0 rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
         .glass:hover { border-color: rgba(255,255,255,0.15); }
@@ -104,52 +109,42 @@
             position: sticky; top: 0; z-index: 100;
             background: rgba(10, 12, 16, 0.7);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-glass);
         }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { 
-            font-weight: 600; font-size: 1.2rem; 
-            color: var(--text-main); 
-            letter-spacing: 2px; 
-            text-shadow: 0 0 10px rgba(255,255,255,0.2);
-        }
+        .logo { font-weight: 600; font-size: 1.2rem; color: var(--text-main); letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
         .nav-links { display: flex; gap: 2rem; font-size: 0.9rem; }
         .nav-links a:hover { color: var(--neon-teal); text-shadow: 0 0 8px var(--neon-teal-glow); }
 
         /* --- HERO --- */
         .hero { display: flex; align-items: center; gap: 3rem; padding: 5rem 0; }
         .hero-content { flex: 1; }
-        .hero-content h1 span { 
-            color: var(--neon-teal); 
-            text-shadow: 0 0 15px var(--neon-teal-glow); 
-        }
+        .hero-content h1 span { color: var(--neon-teal); text-shadow: 0 0 15px var(--neon-teal-glow); }
         .hero-buttons { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
         .hero-image { flex: 1; display: flex; justify-content: center; }
         
         .hero-image .glass {
-            width: 100%; max-width: 400px; aspect-ratio: 4/5;
+            width: 100%; max-width: 380px; aspect-ratio: 4/5;
             display: flex; flex-direction: column; justify-content: flex-end;
             position: relative; overflow: hidden;
-            padding: 0; /* Убираем паддинг, чтобы картинка заполнила блок */
+            padding: 0;
             border: 1px solid rgba(58, 158, 143, 0.3);
         }
         
-        /* Фоновое фото интерьера в Hero */
+        /* Новая картинка (Боб-стрижка) */
         .hero-bg-img {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
             z-index: 0;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .hero-image .glass:hover .hero-bg-img { transform: scale(1.05); }
+        .hero-image .glass:hover .hero-bg-img { transform: scale(1.08); }
         
-        /* Затемнение снизу для читаемости текста */
         .hero-image-overlay {
             position: relative;
             z-index: 1;
-            background: linear-gradient(to top, rgba(10, 12, 16, 0.95) 0%, rgba(10, 12, 16, 0.5) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(10, 12, 16, 0.95) 0%, rgba(10, 12, 16, 0.4) 50%, transparent 100%);
             padding: 2rem 1.5rem 1.5rem;
             text-align: center;
         }
@@ -161,45 +156,28 @@
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         
-        /* --- КАРТОЧКИ УСЛУГ С ФОТО --- */
+        /* --- КАРТОЧКИ УСЛУГ --- */
         .service-card { 
-            text-align: center; 
-            padding: 0; 
-            position: relative; 
-            overflow: hidden; 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            min-height: 280px;
+            text-align: center; padding: 0; position: relative; overflow: hidden; 
+            display: flex; flex-direction: column; justify-content: flex-end; min-height: 300px;
         }
         .service-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            transition: transform 0.5s ease;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .service-card:hover .service-bg { transform: scale(1.1); }
         
-        /* Затемнение для читаемости текста поверх фото */
         .service-content {
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
             background: linear-gradient(to top, rgba(10, 12, 16, 0.95) 0%, rgba(10, 12, 16, 0.6) 60%, transparent 100%);
-            padding: 2rem 1.5rem 1.5rem;
-            width: 100%;
+            padding: 2rem 1.5rem 1.5rem; width: 100%;
+            transition: transform 0.3s ease;
         }
-        .service-card h3 { 
-            color: #fff; 
-            margin-bottom: 0.5rem; 
-            font-size: 1.2rem; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        .service-card p { 
-            font-size: 0.85rem; 
-            margin: 0; 
-            color: rgba(255,255,255,0.7);
-        }
+        .service-card:hover .service-content { transform: translateY(-5px); }
+        
+        .service-card h3 { color: #fff; margin-bottom: 0.5rem; font-size: 1.2rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .service-card p { font-size: 0.85rem; margin: 0; color: rgba(255,255,255,0.7); }
         .service-card:hover h3 { color: var(--neon-teal); }
 
         /* --- КОНТАКТЫ --- */
@@ -208,17 +186,10 @@
         .contact-info a { color: var(--neon-teal); text-shadow: 0 0 5px var(--neon-teal-glow); }
         
         .map-container {
-            margin-top: 1.5rem;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-top: 1.5rem; border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border-glass); box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .map-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .map-container img { width: 100%; height: auto; display: block; }
 
         /* --- МОДАЛЬНОЕ ОКНО --- */
         .modal-overlay {
@@ -228,17 +199,15 @@
         }
         .modal-overlay.active { display: flex; }
         .modal-content {
-            background: rgba(18, 22, 28, 0.85); 
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--border-glass);
-            border-radius: 16px; width: 100%; max-width: 550px;
-            padding: 2rem; position: relative; max-height: 90vh; overflow-y: auto;
+            background: rgba(18, 22, 28, 0.85); backdrop-filter: blur(30px);
+            border: 1px solid var(--border-glass); border-radius: 16px; 
+            width: 100%; max-width: 550px; padding: 2rem; position: relative; 
+            max-height: 90vh; overflow-y: auto;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(58, 158, 143, 0.1);
         }
         .modal-close {
-            position: absolute; top: 15px; right: 20px;
-            background: none; border: none; color: var(--text-muted);
-            font-size: 1.8rem; cursor: pointer; line-height: 1; transition: color 0.2s;
+            position: absolute; top: 15px; right: 20px; background: none; border: none; 
+            color: var(--text-muted); font-size: 1.8rem; cursor: pointer; line-height: 1; transition: color 0.2s;
         }
         .modal-close:hover { color: var(--neon-teal); }
         .modal-content h3 { margin-bottom: 1.5rem; text-align: center; color: var(--text-main); }
@@ -247,10 +216,9 @@
 
         .checkbox-group { display: flex; flex-direction: column; gap: 0.6rem; }
         .checkbox-label {
-            display: flex; align-items: center; gap: 10px;
-            padding: 10px; border: 1px solid var(--border-glass); border-radius: 8px;
-            cursor: pointer; transition: all 0.2s; font-size: 0.95rem;
-            background: rgba(255,255,255,0.02);
+            display: flex; align-items: center; gap: 10px; padding: 10px; 
+            border: 1px solid var(--border-glass); border-radius: 8px;
+            cursor: pointer; transition: all 0.2s; font-size: 0.95rem; background: rgba(255,255,255,0.02);
         }
         .checkbox-label:hover { border-color: var(--neon-teal); background: rgba(58, 158, 143, 0.05); }
         .checkbox-label input[type="checkbox"] { accent-color: var(--neon-teal); width: 18px; height: 18px; cursor: pointer; }
@@ -263,7 +231,6 @@
         }
         .time-select:focus, .phone-input:focus { border-color: var(--neon-teal); box-shadow: 0 0 10px rgba(58, 158, 143, 0.2); }
         .time-select option { background: #12161c; color: #fff; }
-
         .modal-submit { width: 100%; margin-top: 1.5rem; padding: 14px; font-size: 1rem; }
 
         /* --- АДАПТИВ --- */
@@ -298,7 +265,7 @@
     <main class="container">
         <!-- HERO -->
         <section class="hero">
-            <div class="hero-content">
+            <div class="hero-content reveal">
                 <h1>Красота в деталях.<br><span>Уют в атмосфере.</span></h1>
                 <p>Салон «Искусство Красоты» на Ольги Форш — это место, где профессиональный подход встречается с теплым приемом. Рейтинг 4.9 на картах.</p>
                 <div class="hero-buttons">
@@ -306,10 +273,10 @@
                     <a href="#services" class="btn btn-outline">Услуги</a>
                 </div>
             </div>
-            <div class="hero-image">
+            <div class="hero-image reveal">
                 <div class="glass">
-                    <!-- Фото интерьера -->
-                    <img src="https://i.pinimg.com/1200x/50/1b/84/501b84278c9ff820f2f74a7798177766.jpg" alt="Интерьер салона Искусство Красоты" class="hero-bg-img">
+                    <!-- Новое фото с боб-стрижкой -->
+                    <img src="https://salonvolos.spb.ru/images/uslugi/strizhka/bob/bob-9.jpg" alt="Стрижка Боб" class="hero-bg-img">
                     <div class="hero-image-overlay">
                         <h3>ул. Ольги Форш, 13к1</h3>
                         <p>1 этаж · Ежедневно 10:00–20:00</p>
@@ -321,12 +288,12 @@
         <!-- О НАС -->
         <section id="about">
             <div class="grid-2">
-                <div class="glass">
+                <div class="glass reveal">
                     <h3 style="color: var(--neon-teal); margin-bottom: 1rem; text-shadow: 0 0 8px var(--neon-teal-glow);">Об атмосфере</h3>
                     <p>Гости отмечают уютный интерьер и внимательных мастеров. Мы находимся в Калининском районе, недалеко от метро Гражданский проспект.</p>
                     <p>Здесь можно не просто подстричься, но и отдохнуть от городской суеты. Работаем ежедневно с 10:00 до 20:00.</p>
                 </div>
-                <div class="glass" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <div class="glass reveal" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                     <div style="font-size: 2.5rem; color: var(--neon-gold); margin-bottom: 0.5rem; text-shadow: 0 0 10px var(--neon-gold-glow);">★ 4.9</div>
                     <p style="margin: 0;">Средняя оценка на основе 232 отзывов</p>
                 </div>
@@ -335,10 +302,9 @@
 
         <!-- УСЛУГИ -->
         <section id="services">
-            <h2>Услуги</h2>
+            <h2 class="reveal">Услуги</h2>
             <div class="grid-3">
-                <!-- Парикмахерские услуги -->
-                <div class="glass service-card">
+                <div class="glass service-card reveal">
                     <img src="https://i.pinimg.com/236x/9a/ab/49/9aab4928df5bde4eba57612af83d4f36.jpg" alt="Парикмахерские услуги" class="service-bg">
                     <div class="service-content">
                         <h3>Парикмахерские услуги</h3>
@@ -346,8 +312,7 @@
                     </div>
                 </div>
                 
-                <!-- Маникюр и педикюр -->
-                <div class="glass service-card">
+                <div class="glass service-card reveal">
                     <img src="https://i.pinimg.com/1200x/e2/9e/02/e29e029f74ca5ec04692e0bca3b7ba7f.jpg" alt="Маникюр и педикюр" class="service-bg">
                     <div class="service-content">
                         <h3>Маникюр и педикюр</h3>
@@ -355,8 +320,7 @@
                     </div>
                 </div>
 
-                <!-- Уход и косметология -->
-                <div class="glass service-card">
+                <div class="glass service-card reveal">
                     <img src="https://i.pinimg.com/736x/b8/a5/ff/b8a5ff35e8dfeb9af2df177654751df1.jpg" alt="Уход и косметология" class="service-bg">
                     <div class="service-content">
                         <h3>Уход и косметология</h3>
@@ -368,20 +332,20 @@
 
         <!-- КОНТАКТЫ -->
         <section id="contacts">
-            <h2>Контакты</h2>
+            <h2 class="reveal">Контакты</h2>
             <div class="grid-2">
-                <div class="glass contact-info">
+                <div class="glass contact-info reveal">
                     <p><strong>Адрес:</strong> Санкт-Петербург, ул. Ольги Форш, 13к1 (1 этаж)</p>
                     <p><strong>Телефон:</strong> <a href="tel:+79650955561">+7 (965) 095-55-61</a></p>
                     <p><strong>Режим работы:</strong> Ежедневно 10:00 – 20:00</p>
                     <p><strong>Метро:</strong> Гражданский проспект</p>
                     
-                    <!-- Карта -->
                     <div class="map-container">
-                        <img src="https://sun9-24.userapi.com/s/v1/ig2/8N1Fk-test-image.jpg" alt="Карта расположения салона" style="background: #1e232d; min-height: 200px;" id="map-img">
+                        <!-- Замените map.jpg на ваш сохраненный скриншот карты -->
+                        <img src="map.jpg" alt="Карта расположения салона" style="background: #1e232d; min-height: 200px; object-fit: cover;">
                     </div>
                 </div>
-                <div class="glass" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <div class="glass reveal" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                     <h3 style="margin-bottom: 1rem;">Остались вопросы?</h3>
                     <p>Позвоните нам или оставьте заявку, и мы перезвоним для подтверждения времени.</p>
                     <button class="btn" onclick="openModal()" style="margin-top: 1rem;">Оставить заявку</button>
@@ -396,7 +360,7 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО ЗАПИСИ -->
+    <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -445,6 +409,25 @@
     </div>
 
     <script>
+        // Анимация появления при скролле (Intersection Observer)
+        document.addEventListener("DOMContentLoaded", function() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Анимируем только один раз
+                    }
+                });
+            }, {
+                threshold: 0.15 // Элемент появляется, когда виден на 15%
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+        });
+
+        // Модальное окно
         function openModal() {
             document.getElementById('bookingModal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -461,6 +444,7 @@
             }
         });
 
+        // Отправка формы
         function submitBooking(event) {
             event.preventDefault();
             
