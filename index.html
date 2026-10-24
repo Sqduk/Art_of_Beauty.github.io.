@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Искусство Красоты | Салон красоты на Ольги Форш</title>
+    <title>Art of Beauty | Premium Beauty Salon in Saint Petersburg</title>
     <style>
         /* --- ПЕРЕМЕННЫЕ (Приглушенный неон + Матовое стекло) --- */
         :root {
             --bg-deep: #0a0c10;
-            --bg-card: rgba(18, 22, 28, 0.65); /* Плотное полуматовое стекло */
+            --bg-card: rgba(18, 22, 28, 0.65);
             --border-glass: rgba(255, 255, 255, 0.08);
             
             --text-main: #e6edf3;
@@ -28,7 +28,6 @@
         
         body {
             background-color: var(--bg-deep);
-            /* Фоновые неоновые пятна (ambient light) */
             background-image: 
                 radial-gradient(circle at 15% 20%, rgba(58, 158, 143, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 85% 80%, rgba(201, 168, 124, 0.06) 0%, transparent 40%),
@@ -54,7 +53,7 @@
 
         .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        /* --- ПОЛУМАТОВОЕ СТЕКЛО (Frosted Glass) --- */
+        /* --- ПОЛУМАТОВОЕ СТЕКЛО --- */
         .glass {
             background: var(--bg-card);
             backdrop-filter: blur(25px) saturate(120%);
@@ -64,12 +63,10 @@
             padding: 2rem;
             box-shadow: 
                 0 10px 30px rgba(0,0,0,0.4),
-                inset 0 1px 0 rgba(255,255,255,0.05); /* Блик сверху для объема */
+                inset 0 1px 0 rgba(255,255,255,0.05);
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        .glass:hover {
-            border-color: rgba(255,255,255,0.15);
-        }
+        .glass:hover { border-color: rgba(255,255,255,0.15); }
 
         /* --- КНОПКИ --- */
         .btn {
@@ -129,45 +126,99 @@
         }
         .hero-buttons { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
         .hero-image { flex: 1; display: flex; justify-content: center; }
+        
         .hero-image .glass {
-            width: 100%; max-width: 380px; aspect-ratio: 4/5;
+            width: 100%; max-width: 400px; aspect-ratio: 4/5;
             display: flex; flex-direction: column; justify-content: flex-end;
             position: relative; overflow: hidden;
-            background: rgba(18, 22, 28, 0.4);
-            border: 1px dashed rgba(58, 158, 143, 0.3);
-            text-align: center; padding-bottom: 2rem;
+            padding: 0; /* Убираем паддинг, чтобы картинка заполнила блок */
+            border: 1px solid rgba(58, 158, 143, 0.3);
         }
-        .hero-image .glass::before {
-            content: 'ФОТО ИНТЕРЬЕРА / ЗАЛА';
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: rgba(58, 158, 143, 0.2); font-size: 0.9rem; letter-spacing: 2px; pointer-events: none;
+        
+        /* Фоновое фото интерьера в Hero */
+        .hero-bg-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 0.5s ease;
         }
-        .hero-image h3 { font-size: 1.2rem; margin-bottom: 0.3rem; position: relative; z-index: 1; color: var(--neon-gold); }
-        .hero-image p { font-size: 0.85rem; position: relative; z-index: 1; }
+        .hero-image .glass:hover .hero-bg-img { transform: scale(1.05); }
+        
+        /* Затемнение снизу для читаемости текста */
+        .hero-image-overlay {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to top, rgba(10, 12, 16, 0.95) 0%, rgba(10, 12, 16, 0.5) 50%, transparent 100%);
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+        }
+        .hero-image h3 { font-size: 1.2rem; margin-bottom: 0.3rem; color: var(--neon-gold); }
+        .hero-image p { font-size: 0.85rem; margin: 0; }
 
         /* --- СЕТКИ --- */
         section { padding: 4rem 0; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         
-        .service-card { text-align: center; padding: 2rem 1.5rem; }
-        .service-card h3 { color: var(--text-main); margin-bottom: 0.8rem; font-size: 1.2rem; }
-        .service-card:hover h3 { color: var(--neon-teal); text-shadow: 0 0 8px var(--neon-teal-glow); }
-        
-        .gallery-item {
-            height: 220px; border-radius: 12px;
-            background: rgba(18, 22, 28, 0.4);
-            border: 1px dashed var(--border-glass);
-            display: flex; align-items: center; justify-content: center;
-            color: rgba(255,255,255,0.1); font-size: 0.9rem;
-            transition: border-color 0.3s;
+        /* --- КАРТОЧКИ УСЛУГ С ФОТО --- */
+        .service-card { 
+            text-align: center; 
+            padding: 0; 
+            position: relative; 
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 280px;
         }
-        .gallery-item:hover { border-color: var(--neon-gold); }
+        .service-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover .service-bg { transform: scale(1.1); }
+        
+        /* Затемнение для читаемости текста поверх фото */
+        .service-content {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to top, rgba(10, 12, 16, 0.95) 0%, rgba(10, 12, 16, 0.6) 60%, transparent 100%);
+            padding: 2rem 1.5rem 1.5rem;
+            width: 100%;
+        }
+        .service-card h3 { 
+            color: #fff; 
+            margin-bottom: 0.5rem; 
+            font-size: 1.2rem; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .service-card p { 
+            font-size: 0.85rem; 
+            margin: 0; 
+            color: rgba(255,255,255,0.7);
+        }
+        .service-card:hover h3 { color: var(--neon-teal); }
 
         /* --- КОНТАКТЫ --- */
         .contact-info p { margin-bottom: 0.8rem; font-size: 1rem; }
         .contact-info strong { color: var(--text-main); font-weight: 500; }
         .contact-info a { color: var(--neon-teal); text-shadow: 0 0 5px var(--neon-teal-glow); }
+        
+        .map-container {
+            margin-top: 1.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
         /* --- МОДАЛЬНОЕ ОКНО --- */
         .modal-overlay {
@@ -239,7 +290,6 @@
             <nav class="nav-links">
                 <a href="#about">О нас</a>
                 <a href="#services">Услуги</a>
-                <a href="#portfolio">Работы</a>
                 <a href="#contacts">Контакты</a>
             </nav>
         </div>
@@ -250,7 +300,7 @@
         <section class="hero">
             <div class="hero-content">
                 <h1>Красота в деталях.<br><span>Уют в атмосфере.</span></h1>
-                <p>Салон «Искусство Красоты» на Ольги Форш — это место, где профессиональный подход встречается с теплым приемом. Рейтинг 4.8 на картах.</p>
+                <p>Салон «Искусство Красоты» на Ольги Форш — это место, где профессиональный подход встречается с теплым приемом. Рейтинг 4.9 на картах.</p>
                 <div class="hero-buttons">
                     <button class="btn" onclick="openModal()">Записаться онлайн</button>
                     <a href="#services" class="btn btn-outline">Услуги</a>
@@ -258,8 +308,12 @@
             </div>
             <div class="hero-image">
                 <div class="glass">
-                    <h3>ул. Ольги Форш, 13к1</h3>
-                    <p>1 этаж · Ежедневно 10:00–20:00</p>
+                    <!-- Фото интерьера -->
+                    <img src="https://i.pinimg.com/1200x/50/1b/84/501b84278c9ff820f2f74a7798177766.jpg" alt="Интерьер салона Искусство Красоты" class="hero-bg-img">
+                    <div class="hero-image-overlay">
+                        <h3>ул. Ольги Форш, 13к1</h3>
+                        <p>1 этаж · Ежедневно 10:00–20:00</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -273,8 +327,8 @@
                     <p>Здесь можно не просто подстричься, но и отдохнуть от городской суеты. Работаем ежедневно с 10:00 до 20:00.</p>
                 </div>
                 <div class="glass" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                    <div style="font-size: 2.5rem; color: var(--neon-gold); margin-bottom: 0.5rem; text-shadow: 0 0 10px var(--neon-gold-glow);">★ 4.8</div>
-                    <p style="margin: 0;">Средняя оценка на основе отзывов</p>
+                    <div style="font-size: 2.5rem; color: var(--neon-gold); margin-bottom: 0.5rem; text-shadow: 0 0 10px var(--neon-gold-glow);">★ 4.9</div>
+                    <p style="margin: 0;">Средняя оценка на основе 232 отзывов</p>
                 </div>
             </div>
         </section>
@@ -283,28 +337,32 @@
         <section id="services">
             <h2>Услуги</h2>
             <div class="grid-3">
+                <!-- Парикмахерские услуги -->
                 <div class="glass service-card">
-                    <h3>Парикмахерские услуги</h3>
-                    <p>Стрижки, укладки, окрашивание. (Цены уточняются)</p>
+                    <img src="https://i.pinimg.com/236x/9a/ab/49/9aab4928df5bde4eba57612af83d4f36.jpg" alt="Парикмахерские услуги" class="service-bg">
+                    <div class="service-content">
+                        <h3>Парикмахерские услуги</h3>
+                        <p>Стрижки, укладки, окрашивание. (Цены уточняются)</p>
+                    </div>
                 </div>
+                
+                <!-- Маникюр и педикюр -->
                 <div class="glass service-card">
-                    <h3>Маникюр и педикюр</h3>
-                    <p>Аппаратный маникюр, покрытие, уход. (Цены уточняются)</p>
+                    <img src="https://i.pinimg.com/1200x/e2/9e/02/e29e029f74ca5ec04692e0bca3b7ba7f.jpg" alt="Маникюр и педикюр" class="service-bg">
+                    <div class="service-content">
+                        <h3>Маникюр и педикюр</h3>
+                        <p>Аппаратный маникюр, покрытие, уход. (Цены уточняются)</p>
+                    </div>
                 </div>
-                <div class="glass service-card">
-                    <h3>Уход и косметология</h3>
-                    <p>Процедуры для лица и тела. (Цены уточняются)</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- ПОРТФОЛИО -->
-        <section id="portfolio">
-            <h2>Работы</h2>
-            <div class="grid-3">
-                <div class="gallery-item">Фото работы 1</div>
-                <div class="gallery-item">Фото работы 2</div>
-                <div class="gallery-item">Фото работы 3</div>
+                <!-- Уход и косметология -->
+                <div class="glass service-card">
+                    <img src="https://i.pinimg.com/736x/b8/a5/ff/b8a5ff35e8dfeb9af2df177654751df1.jpg" alt="Уход и косметология" class="service-bg">
+                    <div class="service-content">
+                        <h3>Уход и косметология</h3>
+                        <p>Процедуры для лица и тела. (Цены уточняются)</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -317,8 +375,10 @@
                     <p><strong>Телефон:</strong> <a href="tel:+79650955561">+7 (965) 095-55-61</a></p>
                     <p><strong>Режим работы:</strong> Ежедневно 10:00 – 20:00</p>
                     <p><strong>Метро:</strong> Гражданский проспект</p>
-                    <div style="margin-top: 1.5rem; height: 180px; background: rgba(255,255,255,0.02); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-glass); color: var(--text-muted); font-size: 0.9rem;">
-                        Сюда вставим карту
+                    
+                    <!-- Карта -->
+                    <div class="map-container">
+                        <img src="https://sun9-24.userapi.com/s/v1/ig2/8N1Fk-test-image.jpg" alt="Карта расположения салона" style="background: #1e232d; min-height: 200px;" id="map-img">
                     </div>
                 </div>
                 <div class="glass" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
@@ -342,7 +402,6 @@
             <button class="modal-close" onclick="closeModal()">&times;</button>
             <h3>Запись в салон</h3>
             <form onsubmit="submitBooking(event)">
-                <!-- Выбор услуг -->
                 <div class="form-section-title">Выберите услуги</div>
                 <div class="checkbox-group">
                     <label class="checkbox-label">
@@ -362,7 +421,6 @@
                     </label>
                 </div>
 
-                <!-- Выбор времени -->
                 <div class="form-section-title">Удобное время</div>
                 <select class="time-select" required>
                     <option value="" disabled selected>Выберите время</option>
@@ -378,7 +436,6 @@
                     <option value="19:00">19:00</option>
                 </select>
 
-                <!-- Телефон -->
                 <div class="form-section-title">Ваш номер телефона</div>
                 <input type="tel" class="phone-input" placeholder="+7 (___) ___-__-__" required>
 
@@ -388,7 +445,6 @@
     </div>
 
     <script>
-        // Открытие/закрытие модального окна
         function openModal() {
             document.getElementById('bookingModal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -399,14 +455,12 @@
             document.body.style.overflow = '';
         }
 
-        // Закрытие по клику вне окна
         document.getElementById('bookingModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
-        // Обработка отправки (демо)
         function submitBooking(event) {
             event.preventDefault();
             
@@ -416,7 +470,6 @@
                 return;
             }
             const services = Array.from(checkboxes).map(cb => cb.value).join(', ');
-            
             const time = document.querySelector('.time-select').value;
             const phone = document.querySelector('.phone-input').value;
 
