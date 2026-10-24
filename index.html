@@ -261,9 +261,14 @@
         /* --- СЕКЦИИ И СЕТКИ --- */
         section { padding: 5rem 0; position: relative; z-index: 2; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         
-        /* --- БЛОК "ПРОГРАММА" --- */
+        /* --- ОБЪЕДИНЕННЫЙ БЛОК УСЛУГ --- */
+        .services-section {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem; /* Отступ между текстовыми карточками и галереей */
+        }
+
         .program-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -307,7 +312,13 @@
             line-height: 1;
         }
 
-        /* --- КАРТОЧКИ УСЛУГ --- */
+        /* --- ГАЛЕРЕЯ (внутри блока услуг) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
         .service-card { 
             text-align: center; padding: 0; position: relative; overflow: hidden; 
             display: flex; flex-direction: column; justify-content: flex-end; min-height: 350px;
@@ -392,11 +403,11 @@
             
             h1 { font-size: 3.5rem; }
             .grid-2, .program-grid { grid-template-columns: 1fr; }
-            .grid-3 { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
             .nav-links { display: none; }
         }
         @media (max-width: 550px) {
-            .grid-3 { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2.8rem; }
             .glass { padding: 1.5rem; }
         }
@@ -415,8 +426,7 @@
             <a href="#" class="logo">Искусство Красоты</a>
             <nav class="nav-links">
                 <a href="#about">О нас</a>
-                <a href="#program">Программа</a>
-                <a href="#services">Галерея</a>
+                <a href="#services">Услуги</a>
                 <a href="#contacts">Контакты</a>
             </nav>
         </div>
@@ -430,7 +440,7 @@
                 <p>Авторский подход к вашему стилю. Пространство на Ольги Форш, где профессиональный уход встречается с атмосферой абсолютного комфорта.</p>
                 <div class="hero-buttons">
                     <button class="btn" onclick="openModal()">Записаться</button>
-                    <a href="#program" class="btn btn-outline">Программа</a>
+                    <a href="#services" class="btn btn-outline">Услуги</a>
                 </div>
             </div>
             <div class="hero-image reveal">
@@ -456,72 +466,73 @@
             </div>
         </section>
 
-        <!-- БЛОК "ПРОГРАММА" -->
-        <section id="program">
-            <h2 class="reveal">Наши услуги</h2>
-            <div class="program-grid">
-                <div class="glass program-card reveal">
-                    <h3>Парикмахерские услуги</h3>
-                    <ul>
-                        <li>Женские и мужские стрижки</li>
-                        <li>Сложное окрашивание (AirTouch, шатуш)</li>
-                        <li>Уходы и реконструкция волос</li>
-                        <li>Вечерние и свадебные укладки</li>
-                    </ul>
-                </div>
-                
-                <div class="glass program-card reveal">
-                    <h3>Маникюр и педикюр</h3>
-                    <ul>
-                        <li>Аппаратный маникюр</li>
-                        <li>Покрытие гель-лаком</li>
-                        <li>Наращивание и коррекция</li>
-                        <li>СПА-уход для рук и ног</li>
-                    </ul>
-                </div>
-
-                <div class="glass program-card reveal">
-                    <h3>Косметология</h3>
-                    <ul>
-                        <li>Чистка лица (УЗ, механическая)</li>
-                        <li>Пилинги и уходовые процедуры</li>
-                        <li>Массаж лица</li>
-                        <li>Коррекция бровей и ресниц</li>
-                    </ul>
-                </div>
-
-                <div class="glass program-card reveal" style="display: flex; justify-content: center; align-items: center; text-align: center; border-color: var(--gold-main);">
-                    <div>
-                        <h3 style="border: none; color: var(--gold-light); font-size: 1.4rem;">Специальное предложение</h3>
-                        <p style="color: var(--text-main); font-size: 1rem; margin-top: 1rem;">При записи на две и более услуги — <span class="accent-text" style="font-size: 1.3rem;">скидка 15%</span></p>
-                        <button class="btn" onclick="openModal()" style="margin-top: 1.5rem;">Воспользоваться</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ГАЛЕРЕЯ -->
+        <!-- ОБЪЕДИНЕННЫЙ БЛОК: УСЛУГИ + ГАЛЕРЕЯ -->
         <section id="services">
-            <h2 class="reveal">Галерея</h2>
-            <div class="grid-3">
-                <div class="glass service-card reveal">
-                    <img src="https://i.pinimg.com/236x/9a/ab/49/9aab4928df5bde4eba57612af83d4f36.jpg" alt="Парикмахерские услуги" class="service-bg">
-                    <div class="service-content">
-                        <h3>Волосы</h3>
+            <h2 class="reveal">Услуги</h2>
+            
+            <div class="services-section">
+                <!-- 1. Текстовые карточки (Прайс/Программа) -->
+                <div class="program-grid">
+                    <div class="glass program-card reveal">
+                        <h3>Парикмахерские услуги</h3>
+                        <ul>
+                            <li>Женские и мужские стрижки</li>
+                            <li>Сложное окрашивание (AirTouch, шатуш)</li>
+                            <li>Уходы и реконструкция волос</li>
+                            <li>Вечерние и свадебные укладки</li>
+                        </ul>
                     </div>
-                </div>
-                
-                <div class="glass service-card reveal">
-                    <img src="https://i.pinimg.com/1200x/e2/9e/02/e29e029f74ca5ec04692e0bca3b7ba7f.jpg" alt="Маникюр и педикюр" class="service-bg">
-                    <div class="service-content">
-                        <h3>Ногти</h3>
+                    
+                    <div class="glass program-card reveal">
+                        <h3>Маникюр и педикюр</h3>
+                        <ul>
+                            <li>Аппаратный маникюр</li>
+                            <li>Покрытие гель-лаком</li>
+                            <li>Наращивание и коррекция</li>
+                            <li>СПА-уход для рук и ног</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass program-card reveal">
+                        <h3>Косметология</h3>
+                        <ul>
+                            <li>Чистка лица (УЗ, механическая)</li>
+                            <li>Пилинги и уходовые процедуры</li>
+                            <li>Массаж лица</li>
+                            <li>Коррекция бровей и ресниц</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass program-card reveal" style="display: flex; justify-content: center; align-items: center; text-align: center; border-color: var(--gold-main);">
+                        <div>
+                            <h3 style="border: none; color: var(--gold-light); font-size: 1.4rem;">Специальное предложение</h3>
+                            <p style="color: var(--text-main); font-size: 1rem; margin-top: 1rem;">При записи на две и более услуги — <span class="accent-text" style="font-size: 1.3rem;">скидка 15%</span></p>
+                            <button class="btn" onclick="openModal()" style="margin-top: 1.5rem;">Воспользоваться</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="glass service-card reveal">
-                    <img src="https://i.pinimg.com/736x/b8/a5/ff/b8a5ff35e8dfeb9af2df177654751df1.jpg" alt="Уход и косметология" class="service-bg">
-                    <div class="service-content">
-                        <h3>Лицо</h3>
+                <!-- 2. Визуальная галерея -->
+                <div class="gallery-grid">
+                    <div class="glass service-card reveal">
+                        <img src="https://i.pinimg.com/236x/9a/ab/49/9aab4928df5bde4eba57612af83d4f36.jpg" alt="Парикмахерские услуги" class="service-bg">
+                        <div class="service-content">
+                            <h3>Волосы</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="glass service-card reveal">
+                        <img src="https://i.pinimg.com/1200x/e2/9e/02/e29e029f74ca5ec04692e0bca3b7ba7f.jpg" alt="Маникюр и педикюр" class="service-bg">
+                        <div class="service-content">
+                            <h3>Ногти</h3>
+                        </div>
+                    </div>
+
+                    <div class="glass service-card reveal">
+                        <img src="https://i.pinimg.com/736x/b8/a5/ff/b8a5ff35e8dfeb9af2df177654751df1.jpg" alt="Уход и косметология" class="service-bg">
+                        <div class="service-content">
+                            <h3>Лицо</h3>
+                        </div>
                     </div>
                 </div>
             </div>
