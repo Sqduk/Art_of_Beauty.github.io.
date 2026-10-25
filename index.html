@@ -515,31 +515,24 @@
     </div>
 
     <script>
+        // Открытие модального окна с предвыбором услуги
         function openModal(serviceName = null) {
+            // Снимаем все галочки
             document.querySelectorAll('input[name="service"]').forEach(chk => chk.checked = false);
+            
+            // Если передано имя услуги, ставим галочку
             if (serviceName) {
                 document.querySelectorAll('input[name="service"]').forEach(chk => {
-                    if (chk.value === serviceName) chk.checked = true;
+                    if (chk.value === serviceName) {
+                        chk.checked = true;
+                    }
                 });
             }
             document.getElementById('bookingModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden'; // Блокируем скролл
         }
 
+        // Закрытие модального окна
         function closeModal() {
             document.getElementById('bookingModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        document.getElementById('bookingModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        function submitBooking(event) {
-            event.preventDefault();
-            const checkboxes = document.querySelectorAll('input[name="service"]:checked');
-            if (checkboxes.length === 0) {
-                alert('Пожалуйста, выберите хотя бы одну услугу.');
-                return;
-            }
-            const services = Array.from(checkboxes).map(c
+            document.body.style.overflow = ''
