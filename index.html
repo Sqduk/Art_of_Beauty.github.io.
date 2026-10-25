@@ -5,30 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art of Beauty | Premium Beauty Salon in Saint Petersburg</title>
     
-    <!-- Подключаем шрифты: Inter для основного текста, Oswald для заголовков -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ПЕРЕМЕННЫЕ (Палитра по референсу) --- */
         :root {
-            --bg-dark: #121212;        /* Глубокий графитовый фон */
-            --bg-card: #1e1e1e;        /* Фон карточек */
-            --bg-light-grey: #2a2a2a;  /* Для блоков статистики */
-            --border-color: rgba(255, 255, 255, 0.08); /* Тонкие рамки */
+            --bg-dark: #121212;        
+            --bg-card: #1e1e1e;        
+            --bg-light-grey: #2a2a2a;  
+            --border-color: rgba(255, 255, 255, 0.08); 
             
-            --text-main: #f5f5f5;      /* Белый текст */
-            --text-muted: #a0a0a0;     /* Серый текст */
+            --text-main: #f5f5f5;      
+            --text-muted: #a0a0a0;     
             
-            --accent: #e0e0e0;         /* Серебристый акцент для кнопок */
+            --accent: #e0e0e0;         
             --accent-hover: #ffffff;
             
             --font-heading: 'Oswald', sans-serif;
             --font-body: 'Inter', sans-serif;
         }
 
-        /* --- БАЗА --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -44,149 +41,92 @@
         a { color: inherit; text-decoration: none; }
         ul { list-style: none; }
 
-        /* Заголовки */
         h1, h2, h3 { font-family: var(--font-heading); font-weight: 500; text-transform: uppercase; line-height: 1.1; }
         
         .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
 
-        /* --- ШАПКА (Header) --- */
+        /* --- ШАПКА --- */
         header {
             position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
             padding: 30px 0;
         }
-        .header-inner {
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
         
         .logo {
-            font-family: var(--font-heading);
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #fff;
+            font-family: var(--font-heading); font-size: 28px; font-weight: 700;
+            letter-spacing: 2px; color: #fff;
         }
 
-        .nav-links {
-            display: flex; gap: 40px;
-        }
+        .nav-links { display: flex; gap: 40px; }
         .nav-links a {
-            font-family: var(--font-body);
-            font-size: 13px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
+            font-family: var(--font-body); font-size: 13px; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);
             transition: color 0.3s;
         }
         .nav-links a:hover { color: #fff; }
 
         .btn-header {
             display: flex; align-items: center; gap: 10px;
-            background: var(--accent);
-            color: #111;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-family: var(--font-body);
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: none; cursor: pointer;
-            transition: background 0.3s;
+            background: var(--accent); color: #111;
+            padding: 12px 24px; border-radius: 30px;
+            font-family: var(--font-body); font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            border: none; cursor: pointer; transition: background 0.3s;
         }
         .btn-header:hover { background: var(--accent-hover); }
 
-        /* --- HERO SECTION (Главный экран) --- */
+        /* --- HERO SECTION --- */
         .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 100px;
-            overflow: hidden;
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center;
+            padding-top: 100px; overflow: hidden;
         }
 
-        /* Фоновое фото (справа) */
         .hero-bg {
-            position: absolute;
-            top: 0; right: 0;
-            width: 55%; height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            /* Плавное растворение фото влево */
+            position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+            object-fit: cover; z-index: 0;
             mask-image: linear-gradient(to right, transparent, black 40%);
             -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            width: 60%;
-        }
+        .hero-content { position: relative; z-index: 2; width: 60%; }
 
         .hero-subtitle {
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
+            font-size: 14px; font-weight: 500; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--text-muted); margin-bottom: 20px;
         }
 
         .hero h1 {
-            font-size: 9vw; /* Огромный размер */
-            line-height: 0.9;
-            letter-spacing: -1px;
-            color: var(--text-main);
-            margin-bottom: 30px;
+            font-size: 9vw; line-height: 0.9; letter-spacing: -1px;
+            color: var(--text-main); margin-bottom: 30px;
         }
 
         .hero-desc {
-            font-size: 18px;
-            color: var(--text-muted);
-            max-width: 500px;
-            margin-bottom: 40px;
+            font-size: 18px; color: var(--text-muted);
+            max-width: 500px; margin-bottom: 40px;
         }
 
-        .hero-actions {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
+        .hero-actions { display: flex; align-items: center; gap: 30px; }
 
         .btn-view {
-            background: var(--accent);
-            color: #111;
-            padding: 16px 32px;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            border: none; cursor: pointer;
-            display: flex; align-items: center; gap: 15px;
-            transition: background 0.3s;
+            background: var(--accent); color: #111;
+            padding: 16px 32px; font-size: 14px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            border-radius: 4px; border: none; cursor: pointer;
+            display: flex; align-items: center; gap: 15px; transition: background 0.3s;
         }
         .btn-view:hover { background: var(--accent-hover); }
 
         .btn-download {
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-main);
+            font-size: 14px; font-weight: 500; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-main);
             display: flex; align-items: center; gap: 10px;
             background: transparent; border: none; cursor: pointer;
         }
         .btn-download:hover { color: var(--text-muted); }
 
-        /* Блок "Freelance" справа */
         .hero-badge {
-            position: absolute;
-            right: 50px;
-            bottom: 15%;
-            z-index: 3;
-            text-align: right;
+            position: absolute; right: 50px; bottom: 15%; z-index: 3; text-align: right;
         }
         .hero-badge .available {
             font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 5px;
@@ -195,7 +135,7 @@
             font-family: var(--font-heading); font-size: 24px; font-weight: 500; letter-spacing: 1px;
         }
 
-        /* --- БЛОК СТАТИСТИКИ --- */
+        /* --- БЛОК СТАТИСТИКИ (ОБНОВЛЕН) --- */
         .stats-section {
             padding: 0 40px;
             margin-top: -50px;
@@ -216,22 +156,30 @@
         .stat-item:last-child { border-right: none; }
         
         .stat-icon { font-size: 24px; margin-bottom: 15px; color: var(--text-main); }
-        .stat-number { font-family: var(--font-heading); font-size: 48px; line-height: 1; margin-bottom: 5px; }
-        .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
-
-        /* --- СЕКЦИЯ УСЛУГ (Портфолио) --- */
-        .services-section {
-            padding: 100px 0;
+        
+        .stat-number { 
+            font-family: var(--font-heading); 
+            font-size: 48px; 
+            line-height: 1; 
+            margin-bottom: 5px; 
         }
+        /* Чуть уменьшаем шрифт для текстовых значений (цена/время) */
+        .stat-number.text-val { font-size: 36px; }
+
+        .stat-label { 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: var(--text-muted); 
+        }
+
+        /* --- СЕКЦИЯ УСЛУГ --- */
+        .services-section { padding: 100px 0; }
         .section-header {
             display: flex; justify-content: space-between; align-items: flex-end;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
+            margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;
         }
-        .section-header h2 {
-            font-size: 24px; letter-spacing: 1px;
-        }
+        .section-header h2 { font-size: 24px; letter-spacing: 1px; }
         .section-header a {
             font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);
             display: flex; align-items: center; gap: 10px;
@@ -239,56 +187,32 @@
         .section-header a:hover { color: #fff; }
 
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
         }
 
         .service-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 12px; overflow: hidden;
+            display: flex; flex-direction: column; transition: transform 0.3s;
         }
         .service-card:hover { transform: translateY(-5px); }
 
-        .service-image-wrap {
-            position: relative;
-            height: 280px;
-            overflow: hidden;
-        }
-        .service-img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
+        .service-image-wrap { position: relative; height: 280px; overflow: hidden; }
+        .service-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .service-card:hover .service-img { transform: scale(1.05); }
 
-        .service-info {
-            padding: 30px;
-            display: flex; flex-direction: column; flex-grow: 1;
-        }
-        .service-info h3 {
-            font-size: 24px; margin-bottom: 10px;
-            color: #fff;
-        }
-        .service-desc {
-            color: var(--text-muted); font-size: 14px; margin-bottom: 25px; flex-grow: 1;
-        }
+        .service-info { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; }
+        .service-info h3 { font-size: 24px; margin-bottom: 10px; color: #fff; }
+        .service-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; flex-grow: 1; }
+        
         .service-bottom {
             display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
+            border-top: 1px solid var(--border-color); padding-top: 20px;
         }
-        .service-price {
-            font-size: 14px; font-weight: 500; text-transform: uppercase; color: var(--text-main);
-        }
+        .service-price { font-size: 14px; font-weight: 500; text-transform: uppercase; color: var(--text-main); }
+        
         .btn-circle {
-            width: 40px; height: 40px;
-            border-radius: 50%;
+            width: 40px; height: 40px; border-radius: 50%;
             border: 1px solid var(--border-color);
             display: flex; align-items: center; justify-content: center;
             background: transparent; color: #fff;
@@ -296,7 +220,6 @@
         }
         .btn-circle:hover { background: var(--accent); color: #111; border-color: var(--accent); }
 
-        /* Карточка спецпредложения */
         .promo-card {
             background: linear-gradient(135deg, #1e1e1e, #121212);
             border: 1px solid var(--border-color);
@@ -306,26 +229,19 @@
         .promo-card h3 { font-size: 28px; margin-bottom: 15px; }
         .promo-card p { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
 
-        /* --- ФУТЕР (Призыв к действию) --- */
-        .footer-cta {
-            padding: 100px 40px;
-        }
+        /* --- ФУТЕР --- */
+        .footer-cta { padding: 100px 40px; }
         .cta-box {
-            background: var(--bg-light-grey);
-            border-radius: 16px;
-            padding: 60px;
+            background: var(--bg-light-grey); border-radius: 16px; padding: 60px;
             display: flex; justify-content: space-between; align-items: center;
             position: relative; overflow: hidden;
         }
-        .cta-content h2 {
-            font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px;
-        }
+        .cta-content h2 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
         .cta-content p { color: var(--text-muted); font-size: 16px; margin-bottom: 30px; max-width: 400px; }
         
         .cta-contact-info {
             display: flex; flex-direction: column; gap: 15px;
-            border-left: 1px solid var(--border-color);
-            padding-left: 40px;
+            border-left: 1px solid var(--border-color); padding-left: 40px;
         }
         .cta-contact-info div { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
         .cta-contact-info div:hover { color: #fff; }
@@ -401,9 +317,8 @@
         </div>
     </header>
 
-    <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
+    <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero">
-        <!-- Фото мастера (используем ссылку из вашего последнего скриншота) -->
         <img src="https://avatars.mds.yandex.net/get-altay/18118126/2a0000019e118cb31f403a2185379b78e802/XXXL" alt="Мастер салона" class="hero-bg">
 
         <div class="container">
@@ -431,28 +346,28 @@
         </div>
     </section>
 
-    <!-- БЛОК СТАТИСТИКИ -->
+    <!-- БЛОК СТАТИСТИКИ (ОБНОВЛЕН) -->
     <section class="stats-section">
         <div class="stats-box">
             <div class="stat-item">
-                <div class="stat-icon">✦</div>
-                <div class="stat-number">10+</div>
-                <div class="stat-label">ЛЕТ ОПЫТА</div>
+                <div class="stat-icon">⭐</div>
+                <div class="stat-number">4.9</div>
+                <div class="stat-label">Рейтинг на картах</div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon">👤</div>
-                <div class="stat-number">5000+</div>
-                <div class="stat-label">ДОВОЛЬНЫХ КЛИЕНТОВ</div>
+                <div class="stat-icon">💬</div>
+                <div class="stat-number">232</div>
+                <div class="stat-label">Отзыва клиентов</div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon">🏆</div>
-                <div class="stat-number">15+</div>
-                <div class="stat-label">МАСТЕРОВ</div>
+                <div class="stat-icon">✂️</div>
+                <div class="stat-number text-val">от 600 ₽</div>
+                <div class="stat-label">Доступные цены</div>
             </div>
             <div class="stat-item">
-                <div class="stat-icon">🌍</div>
-                <div class="stat-number">3</div>
-                <div class="stat-label">НАПРАВЛЕНИЯ</div>
+                <div class="stat-icon">🕒</div>
+                <div class="stat-number text-val">10:00–20:00</div>
+                <div class="stat-label">Без выходных</div>
             </div>
         </div>
     </section>
@@ -466,7 +381,6 @@
             </div>
 
             <div class="services-grid">
-                <!-- Услуга 1 -->
                 <div class="service-card">
                     <div class="service-image-wrap">
                         <img src="https://i.pinimg.com/236x/9a/ab/49/9aab4928df5bde4eba57612af83d4f36.jpg" alt="Парикмахерские услуги" class="service-img">
@@ -475,7 +389,7 @@
                         <h3>ПАРИКМАХЕРСКИЕ УСЛУГИ</h3>
                         <p class="service-desc">Стрижки, сложное окрашивание, уходы и вечерние укладки.</p>
                         <div class="service-bottom">
-                            <span class="service-price">от 1 500 ₽</span>
+                            <span class="service-price">от 600 ₽</span>
                             <button class="btn-circle" onclick="openModal('Стрижка')">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </button>
@@ -483,7 +397,6 @@
                     </div>
                 </div>
 
-                <!-- Услуга 2 -->
                 <div class="service-card">
                     <div class="service-image-wrap">
                         <img src="https://i.pinimg.com/1200x/e2/9e/02/e29e029f74ca5ec04692e0bca3b7ba7f.jpg" alt="Маникюр и педикюр" class="service-img">
@@ -500,7 +413,6 @@
                     </div>
                 </div>
 
-                <!-- Услуга 3 -->
                 <div class="service-card">
                     <div class="service-image-wrap">
                         <img src="https://i.pinimg.com/736x/b8/a5/ff/b8a5ff35e8dfeb9af2df177654751df1.jpg" alt="Косметология" class="service-img">
@@ -517,7 +429,6 @@
                     </div>
                 </div>
 
-                <!-- Спецпредложение (вместо 4-й карточки) -->
                 <div class="service-card promo-card">
                     <h3>СПЕЦПРЕДЛОЖЕНИЕ</h3>
                     <p>При записи на две и более услуги — скидка 15%</p>
@@ -600,7 +511,6 @@
     </div>
 
     <script>
-        // Модальное окно
         function openModal(serviceName = null) {
             document.querySelectorAll('input[name="service"]').forEach(chk => chk.checked = false);
             if (serviceName) {
