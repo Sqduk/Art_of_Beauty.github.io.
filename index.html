@@ -84,7 +84,7 @@
             border-color: #fff;
         }
 
-        /* --- HERO-БЛОК (ТОЧНО КАК НА СКРИНШОТЕ) --- */
+        /* --- HERO-БЛОК (ТОЧНАЯ КОПИЯ ВАШЕГО ДИЗАЙНА) --- */
         .hero {
             position: relative;
             height: 100vh;
@@ -92,12 +92,34 @@
             overflow: hidden;
         }
 
+        /* Ваше фото с Яндекс.Карт */
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
             z-index: 0;
             filter: brightness(0.75); 
+        }
+
+        /* Огромный фоновый текст (как на скрине) */
+        .hero-bg-text {
+            position: absolute;
+            top: 45%;
+            left: 20%; 
+            transform: translateY(-50%);
+            font-family: var(--font-heading);
+            font-size: 14vw;
+            font-weight: 700;
+            line-height: 0.85;
+            color: rgba(255, 255, 255, 0.2); /* Полупрозрачный */
+            z-index: 1;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+        }
+        .hero-bg-text span:last-child {
+            margin-left: 5vw; 
         }
 
         /* Шапка */
@@ -126,7 +148,7 @@
         }
         .btn-header:hover { background: rgba(255,255,255,0.1); }
 
-        /* Стеклянная плашка в левом нижнем углу */
+        /* Стеклянная плашка в левом нижнем углу (как на скрине) */
         .hero-glass-card {
             position: absolute;
             bottom: 80px; left: 50px;
@@ -194,11 +216,14 @@
         /* --- АДАПТИВ --- */
         @media (max-width: 1200px) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-bg-text { font-size: 16vw; left: 10%; }
         }
         @media (max-width: 900px) {
             header { flex-direction: column; align-items: center; gap: 20px; padding: 20px; }
             .nav-center { display: none; }
             .hero { height: auto; min-height: 100vh; display: flex; flex-direction: column; }
+            .hero-bg-text { opacity: 0.1; font-size: 20vw; top: 20%; left: 50%; transform: translate(-50%, -50%); }
+            .hero-bg-text span:last-child { margin-left: 0; }
             .hero-glass-card { position: relative; bottom: auto; left: auto; margin: 150px 20px 40px; max-width: 100%; background: rgba(20,20,20,0.85); }
             .hero-buttons { flex-direction: column; }
             .hero-buttons .btn { width: 100%; }
@@ -213,8 +238,14 @@
 
     <!-- ТИТУЛЬНЫЙ БЛОК -->
     <section class="hero">
-        <!-- ФОНОВОЕ ФОТО. Вставьте сюда путь к вашему фото (например, map.jpg или ссылку) -->
-        <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?q=80&w=2070&auto=format&fit=crop" alt="Интерьер салона" class="hero-bg">
+        <!-- ВАШЕ ФОТО С ЯНДЕКС.КАРТ -->
+        <img src="https://avatars.mds.yandex.net/get-altay/18118126/2a0000019e118cb31f403a2185379b78e802/XXXL" alt="Интерьер салона" class="hero-bg">
+
+        <!-- Огромный текст на фоне -->
+        <div class="hero-bg-text">
+            <span>ИСКУССТВО</span>
+            <span>В ДЕТАЛЯХ</span>
+        </div>
 
         <!-- Шапка -->
         <header>
@@ -318,7 +349,6 @@
                     <p><strong>Режим работы:</strong> Ежедневно 10:00 – 20:00</p>
                     <p><strong>Метро:</strong> Гражданский проспект</p>
                     <div class="map-container">
-                        <!-- Замените map.jpg на ваш скриншот карты -->
                         <img src="map.jpg" alt="Карта расположения салона" style="background: #1e232d; min-height: 250px; object-fit: cover;">
                     </div>
                 </div>
@@ -337,7 +367,7 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО ЗАПИСИ -->
+    <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -375,15 +405,10 @@
     <script>
         // Логика модального окна
         function openModal(serviceName = null) {
-            // Снимаем галочки со всех чекбоксов
             document.querySelectorAll('input[name="service"]').forEach(chk => chk.checked = false);
-            
-            // Если передано имя услуги, ставим галочку на нужном чекбоксе
             if (serviceName) {
                 document.querySelectorAll('input[name="service"]').forEach(chk => {
-                    if (chk.value === serviceName) {
-                        chk.checked = true;
-                    }
+                    if (chk.value === serviceName) chk.checked = true;
                 });
             }
             document.getElementById('bookingModal').classList.add('active');
@@ -395,29 +420,22 @@
             document.body.style.overflow = '';
         }
 
-        // Закрытие по клику вне окна
         document.getElementById('bookingModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+            if (e.target === this) closeModal();
         });
 
-        // Обработка отправки формы
         function submitBooking(event) {
             event.preventDefault();
             const checkboxes = document.querySelectorAll('input[name="service"]:checked');
-            
             if (checkboxes.length === 0) {
                 alert('Пожалуйста, выберите хотя бы одну услугу.');
                 return;
             }
-            
             const services = Array.from(checkboxes).map(cb => cb.value).join(', ');
             const time = document.querySelector('.time-select').value;
             const phone = document.querySelector('.phone-input').value;
 
             alert(`Спасибо! Заявка принята.\n\nУслуги: ${services}\nВремя: ${time}\nТелефон: ${phone}\n\nМы перезвоним для подтверждения.`);
-            
             closeModal();
             event.target.reset();
         }
