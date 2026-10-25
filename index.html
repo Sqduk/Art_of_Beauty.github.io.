@@ -13,7 +13,6 @@
         :root {
             --bg-dark: #121212;        
             --bg-card: #1e1e1e;        
-            --bg-light-grey: #2a2a2a;  
             --border-color: rgba(255, 255, 255, 0.08); 
             
             --text-main: #f5f5f5;      
@@ -135,42 +134,66 @@
             font-family: var(--font-heading); font-size: 24px; font-weight: 500; letter-spacing: 1px;
         }
 
-        /* --- БЛОК СТАТИСТИКИ (ОБНОВЛЕН) --- */
+        /* --- БЛОК СТАТИСТИКИ (ПОЛУМАТОВОЕ СТЕКЛО) --- */
         .stats-section {
             padding: 0 40px;
-            margin-top: -50px;
+            margin-top: -80px; /* Поднимаем выше, чтобы наехать на фото */
             position: relative;
             z-index: 10;
         }
+        
         .stats-box {
-            background: var(--bg-light-grey);
-            border-radius: 16px;
+            /* Полупрозрачный темный фон */
+            background: rgba(25, 25, 25, 0.4);
+            
+            /* Эффект сильного размытия */
+            backdrop-filter: blur(25px) saturate(150%);
+            -webkit-backdrop-filter: blur(25px) saturate(150%);
+            
+            /* Тонкие светлые границы для эффекта стекла */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 1px solid rgba(255, 255, 255, 0.3); /* Блик сверху */
+            
+            border-radius: 20px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             padding: 40px;
+            
+            /* Легкая тень для объема */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
+
         .stat-item {
             text-align: center;
-            border-right: 1px solid var(--border-color);
+            border-right: 1px solid rgba(255, 255, 255, 0.1); /* Более светлая линия */
         }
         .stat-item:last-child { border-right: none; }
         
-        .stat-icon { font-size: 24px; margin-bottom: 15px; color: var(--text-main); }
+        .stat-icon { 
+            font-size: 24px; 
+            margin-bottom: 15px; 
+            color: var(--text-main); 
+            /* Легкое свечение иконкам */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
         
         .stat-number { 
             font-family: var(--font-heading); 
             font-size: 48px; 
             line-height: 1; 
             margin-bottom: 5px; 
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
-        /* Чуть уменьшаем шрифт для текстовых значений (цена/время) */
+        
         .stat-number.text-val { font-size: 36px; }
 
         .stat-label { 
             font-size: 12px; 
             text-transform: uppercase; 
             letter-spacing: 1px; 
-            color: var(--text-muted); 
+            color: #cccccc; 
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
         }
 
         /* --- СЕКЦИЯ УСЛУГ --- */
@@ -232,9 +255,10 @@
         /* --- ФУТЕР --- */
         .footer-cta { padding: 100px 40px; }
         .cta-box {
-            background: var(--bg-light-grey); border-radius: 16px; padding: 60px;
+            background: var(--bg-card); border-radius: 16px; padding: 60px;
             display: flex; justify-content: space-between; align-items: center;
             position: relative; overflow: hidden;
+            border: 1px solid var(--border-color);
         }
         .cta-content h2 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
         .cta-content p { color: var(--text-muted); font-size: 16px; margin-bottom: 30px; max-width: 400px; }
@@ -277,8 +301,10 @@
             .hero h1 { font-size: 12vw; }
             .hero-content { width: 100%; }
             .hero-bg { width: 100%; mask-image: linear-gradient(to bottom, transparent, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%); opacity: 0.3; }
-            .stats-box { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            
+            .stats-box { grid-template-columns: repeat(2, 1fr); gap: 30px; padding: 30px; }
             .stat-item:nth-child(2) { border-right: none; }
+            
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .cta-box { flex-direction: column; align-items: flex-start; gap: 40px; padding: 40px; }
             .cta-contact-info { border-left: none; padding-left: 0; }
@@ -288,9 +314,12 @@
             .nav-links { display: none; }
             .hero h1 { font-size: 16vw; }
             .hero-actions { flex-direction: column; align-items: flex-start; }
+            
+            .stats-section { padding: 0 20px; margin-top: -40px; }
             .stats-box { grid-template-columns: 1fr; padding: 20px; }
-            .stat-item { border-right: none; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+            .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
             .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+            
             .services-grid { grid-template-columns: 1fr; }
             .cta-content h2 { font-size: 2.5rem; }
             .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
@@ -346,7 +375,7 @@
         </div>
     </section>
 
-    <!-- БЛОК СТАТИСТИКИ (ОБНОВЛЕН) -->
+    <!-- БЛОК СТАТИСТИКИ (В СТИЛЕ СТЕКЛА) -->
     <section class="stats-section">
         <div class="stats-box">
             <div class="stat-item">
