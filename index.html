@@ -42,9 +42,10 @@
 
         h1, h2, h3 { font-family: var(--font-heading); font-weight: 500; text-transform: uppercase; line-height: 1; }
         
-        .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
+        /* Увеличили максимальную ширину контейнера и уменьшили боковые отступы */
+        .container { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 60px; position: relative; z-index: 2; }
 
-        /* --- ШАПКА (ОБНОВЛЕНА) --- */
+        /* --- ШАПКА --- */
         header {
             position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
             padding: 30px 0;
@@ -53,7 +54,7 @@
         
         .logo {
             font-family: var(--font-heading); 
-            font-size: 48px; /* 1. Увеличен размер в 2 раза (было 24px) */
+            font-size: 48px; 
             font-weight: 700;
             letter-spacing: 2px; 
             color: #fff;
@@ -106,7 +107,7 @@
             position: relative; 
             z-index: 2; 
             width: 55%; 
-            max-width: 700px;
+            max-width: 800px; /* Увеличили ширину текстового блока */
         }
 
         .hero-subtitle {
@@ -114,9 +115,10 @@
             letter-spacing: 2px; color: var(--text-muted); margin-bottom: 20px;
         }
 
+        /* Уменьшили размер шрифта, чтобы текст ровно встал в 2 строки */
         .hero h1 {
-            font-size: 6.5vw; 
-            line-height: 1.05; 
+            font-size: 5.5vw; 
+            line-height: 1.1; 
             letter-spacing: -1px;
             color: var(--text-main); 
             margin-bottom: 30px;
@@ -124,7 +126,7 @@
 
         .hero-desc {
             font-size: 18px; color: var(--text-muted);
-            max-width: 480px; margin-bottom: 40px;
+            max-width: 500px; margin-bottom: 40px;
         }
 
         .hero-actions { display: flex; align-items: center; gap: 30px; }
@@ -146,23 +148,40 @@
         }
         .btn-download:hover { color: var(--text-muted); }
 
+        /* --- ОБНОВЛЕННЫЙ РЕЙТИНГ (Контрастный) --- */
         .hero-badge {
             position: absolute; 
-            right: 50px; 
+            right: 60px; /* Выровняли по краю контейнера */
             bottom: 15%; 
             z-index: 3; 
             text-align: right;
+            
+            /* Добавили темную стеклянную подложку для читаемости */
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .hero-badge .available {
-            font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 5px;
+            font-size: 14px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: #e0e0e0; 
+            margin-bottom: 5px;
         }
         .hero-badge .status {
-            font-family: var(--font-heading); font-size: 24px; font-weight: 500; letter-spacing: 1px;
+            font-family: var(--font-heading); 
+            font-size: 36px; /* Увеличили шрифт */
+            font-weight: 700; 
+            letter-spacing: 1px;
+            color: #ffffff;
         }
 
         /* --- БЛОК СТАТИСТИКИ (ПОЛУМАТОВОЕ СТЕКЛО) --- */
         .stats-section {
-            padding: 0 40px;
+            padding: 0 60px;
             margin-top: -80px; 
             position: relative;
             z-index: 10;
@@ -249,7 +268,7 @@
         .promo-card p { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
 
         /* --- ФУТЕР --- */
-        .footer-cta { padding: 100px 40px; }
+        .footer-cta { padding: 100px 60px; }
         .cta-box {
             background: var(--bg-card); border-radius: 16px; padding: 60px;
             display: flex; justify-content: space-between; align-items: center;
@@ -268,7 +287,7 @@
 
         .footer-bottom {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 30px 40px; border-top: 1px solid var(--border-color);
+            padding: 30px 60px; border-top: 1px solid var(--border-color);
             font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
         }
         .footer-socials { display: flex; gap: 20px; }
@@ -294,13 +313,15 @@
 
         /* --- АДАПТИВ --- */
         @media (max-width: 1200px) {
-            .hero h1 { font-size: 8vw; }
-            .logo { font-size: 36px; } /* Уменьшаем логотип на планшетах */
+            .container, .stats-section, .footer-cta, .footer-bottom { padding-left: 30px; padding-right: 30px; }
+            .hero h1 { font-size: 6.5vw; }
+            .logo { font-size: 36px; }
+            .hero-badge { right: 30px; }
         }
         @media (max-width: 1024px) {
             .hero-content { width: 100%; }
             .hero-bg { width: 100%; mask-image: linear-gradient(to bottom, transparent 0%, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); opacity: 0.4; }
-            .hero h1 { font-size: 10vw; }
+            .hero h1 { font-size: 8vw; }
             .stats-box { grid-template-columns: repeat(2, 1fr); gap: 30px; padding: 30px; }
             .stat-item:nth-child(2) { border-right: none; }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -308,18 +329,24 @@
             .cta-contact-info { border-left: none; padding-left: 0; }
         }
         @media (max-width: 768px) {
-            .container { padding: 0 20px; }
+            .container, .stats-section, .footer-cta, .footer-bottom { padding-left: 20px; padding-right: 20px; }
             .nav-links { display: none; }
-            .logo { font-size: 28px; } /* Уменьшаем логотип на телефонах */
-            .hero h1 { font-size: 14vw; }
+            .logo { font-size: 28px; }
+            .hero h1 { font-size: 12vw; }
             .hero-actions { flex-direction: column; align-items: flex-start; }
-            .stats-section { padding: 0 20px; margin-top: -40px; }
+            .stats-section { margin-top: -40px; }
             .stats-box { grid-template-columns: 1fr; padding: 20px; }
             .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
             .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
             .services-grid { grid-template-columns: 1fr; }
             .cta-content h2 { font-size: 2.5rem; }
             .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+            
+            .hero-badge { 
+                right: 20px; bottom: 5%; 
+                padding: 15px 20px; 
+            }
+            .hero-badge .status { font-size: 28px; }
         }
     </style>
 </head>
@@ -328,7 +355,6 @@
     <!-- ШАПКА -->
     <header>
         <div class="container header-inner">
-            <!-- 1, 2, 3: Текст, размер и перезагрузка страницы -->
             <a href="./" class="logo">ИСКУССТВО КРАСОТЫ</a>
             
             <nav class="nav-links">
@@ -351,6 +377,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-subtitle">ПРЕМИАЛЬНЫЙ САЛОН КРАСОТЫ</div>
+                <!-- Теперь заголовок ровно в 2 строки -->
                 <h1>ИСКУССТВО<br>В ДЕТАЛЯХ</h1>
                 <p class="hero-desc">«Искусство Красоты» — для тех, кто ценит простоту и качество. Профессиональный уход в атмосфере премиального комфорта.</p>
                 
@@ -367,9 +394,10 @@
             </div>
         </div>
 
+        <!-- Обновленный контрастный рейтинг -->
         <div class="hero-badge">
-            <div class="available">РЕЙТИНГ 4.9</div>
-            <div class="status">232 ОТЗЫВА</div>
+            <div class="available">РЕЙТИНГ</div>
+            <div class="status">4.9 ★</div>
         </div>
     </section>
 
@@ -541,38 +569,4 @@
         function openModal(serviceName = null) {
             document.querySelectorAll('input[name="service"]').forEach(chk => chk.checked = false);
             if (serviceName) {
-                document.querySelectorAll('input[name="service"]').forEach(chk => {
-                    if (chk.value === serviceName) chk.checked = true;
-                });
-            }
-            document.getElementById('bookingModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('bookingModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        document.getElementById('bookingModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        function submitBooking(event) {
-            event.preventDefault();
-            const checkboxes = document.querySelectorAll('input[name="service"]:checked');
-            if (checkboxes.length === 0) {
-                alert('Пожалуйста, выберите хотя бы одну услугу.');
-                return;
-            }
-            const services = Array.from(checkboxes).map(cb => cb.value).join(', ');
-            const time = document.querySelector('.time-select').value;
-            const phone = document.querySelector('.phone-input').value;
-
-            alert(`Спасибо! Заявка принята.\n\nУслуги: ${services}\nВремя: ${time}\nТелефон: ${phone}\n\nМы перезвоним для подтверждения.`);
-            closeModal();
-            event.target.reset();
-        }
-    </script>
-</body>
-</html>
+                document.querySelectorAll('input[name="service
