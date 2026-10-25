@@ -7,7 +7,6 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Добавили Playfair Display для рукописного акцента -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 
     <style>
@@ -46,7 +45,7 @@
         
         .container { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 60px; position: relative; z-index: 2; }
 
-        /* --- ШАПКА (НОВЫЙ ЛОГОТИП) --- */
+        /* --- ШАПКА --- */
         header {
             position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
             padding: 30px 0;
@@ -54,32 +53,17 @@
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
         
         .logo {
-            display: flex;
-            flex-direction: column;
-            line-height: 1;
-            text-transform: uppercase;
-            transition: opacity 0.3s;
+            display: flex; flex-direction: column; line-height: 1; text-transform: uppercase; transition: opacity 0.3s;
         }
         .logo:hover { opacity: 0.8; }
 
         .logo-top {
-            font-family: var(--font-heading);
-            font-size: 32px; /* Уменьшили в 1.5 раза (было 48px) */
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #fff;
+            font-family: var(--font-heading); font-size: 32px; font-weight: 700; letter-spacing: 1px; color: #fff;
         }
 
         .logo-bottom {
-            font-family: var(--font-accent);
-            font-style: italic;
-            font-size: 24px; /* Акцентный шрифт */
-            font-weight: 500;
-            color: var(--accent); /* Используем наш акцентный цвет */
-            text-transform: none; /* Убираем капс для рукописного шрифта */
-            margin-top: -2px; /* Чуть ближе к верхней строке */
-            letter-spacing: 2px;
-            margin-left: 2px;
+            font-family: var(--font-accent); font-style: italic; font-size: 24px; font-weight: 500;
+            color: var(--accent); text-transform: none; margin-top: -2px; letter-spacing: 2px; margin-left: 2px;
         }
 
         .nav-links { display: flex; gap: 40px; }
@@ -102,32 +86,18 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            position: relative; 
-            min-height: 100vh;
-            display: flex; 
-            align-items: center;
-            padding-top: 80px; 
-            overflow: hidden;
+            position: relative; min-height: 100vh; display: flex; align-items: center;
+            padding-top: 80px; overflow: hidden;
         }
 
         .hero-bg {
-            position: absolute; 
-            top: 0; 
-            right: 0; 
-            width: 55%; 
-            height: 100%;
-            object-fit: cover; 
-            z-index: 0;
+            position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+            object-fit: cover; z-index: 0;
             mask-image: linear-gradient(to right, transparent 0%, black 30%);
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
         }
 
-        .hero-content { 
-            position: relative; 
-            z-index: 2; 
-            width: 55%; 
-            max-width: 800px; 
-        }
+        .hero-content { position: relative; z-index: 2; width: 55%; max-width: 800px; }
 
         .hero-subtitle {
             font-size: 14px; font-weight: 500; text-transform: uppercase;
@@ -135,16 +105,12 @@
         }
 
         .hero h1 {
-            font-size: 5.5vw; 
-            line-height: 1.1; 
-            letter-spacing: -1px;
-            color: var(--text-main); 
-            margin-bottom: 30px;
+            font-size: 5.5vw; line-height: 1.1; letter-spacing: -1px;
+            color: var(--text-main); margin-bottom: 30px;
         }
 
         .hero-desc {
-            font-size: 18px; color: var(--text-muted);
-            max-width: 500px; margin-bottom: 40px;
+            font-size: 18px; color: var(--text-muted); max-width: 500px; margin-bottom: 40px;
         }
 
         .hero-actions { display: flex; align-items: center; gap: 30px; }
@@ -166,60 +132,25 @@
         }
         .btn-download:hover { color: var(--text-muted); }
 
-        /* --- РЕЙТИНГ --- */
         .hero-badge {
-            position: absolute; 
-            right: 60px; 
-            bottom: 15%; 
-            z-index: 3; 
-            text-align: right;
-            background: rgba(18, 18, 18, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 20px 30px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
+            position: absolute; right: 60px; bottom: 15%; z-index: 3; text-align: right;
+            background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            padding: 20px 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
         }
-        .hero-badge .available {
-            font-size: 14px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            color: #e0e0e0; 
-            margin-bottom: 5px;
-        }
-        .hero-badge .status {
-            font-family: var(--font-heading); 
-            font-size: 36px; 
-            font-weight: 700; 
-            letter-spacing: 1px;
-            color: #ffffff;
-        }
+        .hero-badge .available { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #e0e0e0; margin-bottom: 5px; }
+        .hero-badge .status { font-family: var(--font-heading); font-size: 36px; font-weight: 700; letter-spacing: 1px; color: #ffffff; }
 
         /* --- БЛОК СТАТИСТИКИ --- */
-        .stats-section {
-            padding: 0 60px;
-            margin-top: -80px; 
-            position: relative;
-            z-index: 10;
-        }
+        .stats-section { padding: 0 60px; margin-top: -80px; position: relative; z-index: 10; }
         
         .stats-box {
-            background: rgba(25, 25, 25, 0.4);
-            backdrop-filter: blur(25px) saturate(150%);
-            -webkit-backdrop-filter: blur(25px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-top: 1px solid rgba(255, 255, 255, 0.3); 
-            border-radius: 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(25, 25, 25, 0.4); backdrop-filter: blur(25px) saturate(150%); -webkit-backdrop-filter: blur(25px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.15); border-top: 1px solid rgba(255, 255, 255, 0.3); 
+            border-radius: 20px; display: grid; grid-template-columns: repeat(4, 1fr);
+            padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .stat-item {
-            text-align: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.1); 
-        }
+        .stat-item { text-align: center; border-right: 1px solid rgba(255, 255, 255, 0.1); }
         .stat-item:last-child { border-right: none; }
         
         .stat-icon { font-size: 24px; margin-bottom: 15px; color: var(--text-main); text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
@@ -241,36 +172,40 @@
         .section-header a:hover { color: #fff; }
 
         .services-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
         }
 
         .service-card {
             background: var(--bg-card); border: 1px solid var(--border-color);
             border-radius: 12px; overflow: hidden;
-            display: flex; flex-direction: column; transition: transform 0.3s;
+            display: flex; flex-direction: column; 
+            height: 100%; 
+            transition: transform 0.3s;
         }
         .service-card:hover { transform: translateY(-5px); }
 
-        .service-image-wrap { position: relative; height: 280px; overflow: hidden; }
+        .service-image-wrap { position: relative; height: 220px; overflow: hidden; flex-shrink: 0; }
         .service-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .service-card:hover .service-img { transform: scale(1.05); }
 
-        .service-info { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; }
-        .service-info h3 { font-size: 24px; margin-bottom: 10px; color: #fff; }
-        .service-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; flex-grow: 1; }
+        .service-info { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .service-info h3 { font-size: 20px; margin-bottom: 10px; color: #fff; }
+        .service-desc { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; flex-grow: 1; }
         
         .service-bottom {
             display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid var(--border-color); padding-top: 20px;
+            border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: auto;
         }
-        .service-price { font-size: 14px; font-weight: 500; text-transform: uppercase; color: var(--text-main); }
+        .service-price { font-size: 13px; font-weight: 500; text-transform: uppercase; color: var(--text-main); white-space: nowrap; }
         
         .btn-circle {
-            width: 40px; height: 40px; border-radius: 50%;
+            width: 36px; height: 36px; border-radius: 50%;
             border: 1px solid var(--border-color);
             display: flex; align-items: center; justify-content: center;
             background: transparent; color: #fff;
-            cursor: pointer; transition: background 0.3s;
+            cursor: pointer; transition: background 0.3s; flex-shrink: 0;
         }
         .btn-circle:hover { background: var(--accent); color: #111; border-color: var(--accent); }
 
@@ -278,18 +213,17 @@
             background: linear-gradient(135deg, #1e1e1e, #121212);
             border: 1px solid var(--border-color);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 40px;
+            text-align: center; padding: 30px;
         }
-        .promo-card h3 { font-size: 28px; margin-bottom: 15px; }
-        .promo-card p { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
+        .promo-card h3 { font-size: 22px; margin-bottom: 15px; }
+        .promo-card p { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; }
 
         /* --- ФУТЕР --- */
         .footer-cta { padding: 100px 60px; }
         .cta-box {
             background: var(--bg-card); border-radius: 16px; padding: 60px;
             display: flex; justify-content: space-between; align-items: center;
-            position: relative; overflow: hidden;
-            border: 1px solid var(--border-color);
+            position: relative; overflow: hidden; border: 1px solid var(--border-color);
         }
         .cta-content h2 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
         .cta-content p { color: var(--text-muted); font-size: 16px; margin-bottom: 30px; max-width: 400px; }
@@ -334,6 +268,7 @@
             .logo-top { font-size: 28px; }
             .logo-bottom { font-size: 20px; }
             .hero-badge { right: 30px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 1024px) {
             .hero-content { width: 100%; }
@@ -341,7 +276,6 @@
             .hero h1 { font-size: 8vw; }
             .stats-box { grid-template-columns: repeat(2, 1fr); gap: 30px; padding: 30px; }
             .stat-item:nth-child(2) { border-right: none; }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
             .cta-box { flex-direction: column; align-items: flex-start; gap: 40px; padding: 40px; }
             .cta-contact-info { border-left: none; padding-left: 0; }
         }
@@ -359,7 +293,6 @@
             .services-grid { grid-template-columns: 1fr; }
             .cta-content h2 { font-size: 2.5rem; }
             .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
-            
             .hero-badge { right: 20px; bottom: 5%; padding: 15px 20px; }
             .hero-badge .status { font-size: 28px; }
         }
@@ -370,7 +303,6 @@
     <!-- ШАПКА -->
     <header>
         <div class="container header-inner">
-            <!-- Обновленный логотип -->
             <a href="./" class="logo">
                 <span class="logo-top">ИСКУССТВО</span>
                 <span class="logo-bottom">красоты</span>
@@ -584,4 +516,30 @@
 
     <script>
         function openModal(serviceName = null) {
-            document.querySelectorAll('input[name="service"]').forEach(ch
+            document.querySelectorAll('input[name="service"]').forEach(chk => chk.checked = false);
+            if (serviceName) {
+                document.querySelectorAll('input[name="service"]').forEach(chk => {
+                    if (chk.value === serviceName) chk.checked = true;
+                });
+            }
+            document.getElementById('bookingModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('bookingModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        function submitBooking(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="service"]:checked');
+            if (checkboxes.length === 0) {
+                alert('Пожалуйста, выберите хотя бы одну услугу.');
+                return;
+            }
+            const services = Array.from(checkboxes).map(c
