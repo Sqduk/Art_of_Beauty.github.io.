@@ -44,7 +44,7 @@
         
         .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
 
-        /* --- ШАПКА --- */
+        /* --- ШАПКА (ОБНОВЛЕНА) --- */
         header {
             position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
             padding: 30px 0;
@@ -52,9 +52,15 @@
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
         
         .logo {
-            font-family: var(--font-heading); font-size: 24px; font-weight: 700;
-            letter-spacing: 2px; color: #fff;
+            font-family: var(--font-heading); 
+            font-size: 48px; /* 1. Увеличен размер в 2 раза (было 24px) */
+            font-weight: 700;
+            letter-spacing: 2px; 
+            color: #fff;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
         }
+        .logo:hover { opacity: 0.8; }
 
         .nav-links { display: flex; gap: 40px; }
         .nav-links a {
@@ -74,17 +80,16 @@
         }
         .btn-header:hover { background: var(--accent-hover); }
 
-        /* --- HERO SECTION (ИСПРАВЛЕННЫЙ) --- */
+        /* --- HERO SECTION --- */
         .hero {
             position: relative; 
             min-height: 100vh;
             display: flex; 
             align-items: center;
-            padding-top: 80px; /* Отступ от шапки */
+            padding-top: 80px; 
             overflow: hidden;
         }
 
-        /* Фоновое фото (занимает правую часть) */
         .hero-bg {
             position: absolute; 
             top: 0; 
@@ -93,7 +98,6 @@
             height: 100%;
             object-fit: cover; 
             z-index: 0;
-            /* Плавный градиент слева направо, чтобы текст читался */
             mask-image: linear-gradient(to right, transparent 0%, black 30%);
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
         }
@@ -102,7 +106,6 @@
             position: relative; 
             z-index: 2; 
             width: 55%; 
-            /* Ограничиваем ширину текста, чтобы он не наезжал на фото */
             max-width: 700px;
         }
 
@@ -111,9 +114,8 @@
             letter-spacing: 2px; color: var(--text-muted); margin-bottom: 20px;
         }
 
-        /* Уменьшили шрифт и добавили переносы для красоты */
         .hero h1 {
-            font-size: 6.5vw; /* Оптимальный размер для двух строк */
+            font-size: 6.5vw; 
             line-height: 1.05; 
             letter-spacing: -1px;
             color: var(--text-main); 
@@ -144,7 +146,6 @@
         }
         .btn-download:hover { color: var(--text-muted); }
 
-        /* Плашка с рейтингом справа внизу */
         .hero-badge {
             position: absolute; 
             right: 50px; 
@@ -294,6 +295,7 @@
         /* --- АДАПТИВ --- */
         @media (max-width: 1200px) {
             .hero h1 { font-size: 8vw; }
+            .logo { font-size: 36px; } /* Уменьшаем логотип на планшетах */
         }
         @media (max-width: 1024px) {
             .hero-content { width: 100%; }
@@ -308,6 +310,7 @@
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
             .nav-links { display: none; }
+            .logo { font-size: 28px; } /* Уменьшаем логотип на телефонах */
             .hero h1 { font-size: 14vw; }
             .hero-actions { flex-direction: column; align-items: flex-start; }
             .stats-section { padding: 0 20px; margin-top: -40px; }
@@ -325,7 +328,8 @@
     <!-- ШАПКА -->
     <header>
         <div class="container header-inner">
-            <a href="#" class="logo">ИСКУССТВО</a>
+            <!-- 1, 2, 3: Текст, размер и перезагрузка страницы -->
+            <a href="./" class="logo">ИСКУССТВО КРАСОТЫ</a>
             
             <nav class="nav-links">
                 <a href="#services">Услуги</a>
@@ -347,7 +351,6 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-subtitle">ПРЕМИАЛЬНЫЙ САЛОН КРАСОТЫ</div>
-                <!-- Разбивка на 2 строки для идеального баланса -->
                 <h1>ИСКУССТВО<br>В ДЕТАЛЯХ</h1>
                 <p class="hero-desc">«Искусство Красоты» — для тех, кто ценит простоту и качество. Профессиональный уход в атмосфере премиального комфорта.</p>
                 
