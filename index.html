@@ -534,4 +534,8 @@
 
         // Закрытие модального окна
         function closeModal() {
-            document.getElementById
+            document.getElementById('bookingModal').classList.remove('active');
+            document.body.style.overflow = ''; // Возвращаем скролл
+        }
+
+        // Закрытие по клику вне ок
