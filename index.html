@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art of Beauty | Premium Beauty Salon in Saint Petersburg</title>
     
+    <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
@@ -54,7 +55,7 @@
             padding: 14px 32px;
             background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
             color: #111;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: var(--font-heading);
             font-weight: 500;
             cursor: pointer;
@@ -73,17 +74,17 @@
         }
         
         .btn-outline {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.5);
             box-shadow: none;
         }
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border-color: #fff;
         }
 
-        /* --- HERO-БЛОК (ЧИСТЫЙ ДИЗАЙН БЕЗ ФОНОВОГО ТЕКСТА) --- */
+        /* --- HERO-БЛОК (1-в-1 КАК НА СКРИНШОТЕ) --- */
         .hero {
             position: relative;
             height: 100vh;
@@ -91,12 +92,34 @@
             overflow: hidden;
         }
 
+        /* Фоновое фото */
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
             z-index: 0;
-            filter: brightness(0.75); 
+            filter: brightness(0.85); /* Немного притемняем фото */
+        }
+
+        /* Огромный текст, который лежит ПОД стеклом */
+        .hero-bg-text {
+            position: absolute;
+            top: 45%;
+            left: 12%; /* Позиция текста */
+            transform: translateY(-50%);
+            font-family: var(--font-heading);
+            font-size: 11vw;
+            font-weight: 700;
+            line-height: 0.85;
+            color: rgba(255, 255, 255, 0.85); /* Яркий текст */
+            z-index: 1;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+        }
+        .hero-bg-text span:last-child {
+            margin-left: 8vw; /* Смещение второй строки */
         }
 
         /* Шапка */
@@ -121,29 +144,52 @@
             border: 1px solid rgba(255,255,255,0.7); background: transparent; color: #fff;
             padding: 10px 24px; font-family: var(--font-heading); font-size: 0.9rem;
             text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-            border-radius: 4px; transition: all 0.3s;
+            border-radius: 6px; transition: all 0.3s;
         }
         .btn-header:hover { background: rgba(255,255,255,0.1); }
 
-        /* Стеклянная плашка (без наложений, четко в углу) */
+        /* --- СТЕКЛЯННАЯ ПЛАШКА (СЕКРЕТ ЭФФЕКТА) --- */
         .hero-glass-card {
             position: absolute;
-            bottom: 80px; left: 50px;
-            z-index: 10; width: 100%; max-width: 480px;
-            background: rgba(20, 20, 20, 0.6); 
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px; padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            bottom: 100px; /* Отступ от низа */
+            left: 50px;    /* Отступ от левого края */
+            z-index: 10; 
+            width: 100%; 
+            max-width: 600px; /* Широкая плашка */
+            
+            /* Теплое, золотисто-матовое стекло (как на фото) */
+            background: rgba(220, 210, 190, 0.15); 
+            backdrop-filter: blur(30px) saturate(120%); /* СИЛЬНОЕ размытие перекрывает текст */
+            -webkit-backdrop-filter: blur(30px) saturate(120%);
+            
+            /* Тонкая светлая рамка */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px; 
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
 
         .hero-glass-card p {
-            font-size: 1rem; font-weight: 300; line-height: 1.5;
-            color: #e0e0e0; margin-bottom: 25px; text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            font-family: var(--font-body);
+            font-size: 1.2rem; 
+            font-weight: 400; 
+            line-height: 1.5;
+            color: #fff; 
+            margin-bottom: 30px; 
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
         }
 
-        .hero-buttons { display: flex; gap: 15px; }
-        .hero-buttons .btn { padding: 12px 24px; font-size: 0.9rem; }
+        .hero-buttons { 
+            display: flex; 
+            gap: 15px; 
+        }
+        
+        .hero-buttons .btn { 
+            padding: 14px 28px; 
+            font-size: 1rem; 
+            flex: 1; /* Кнопки делят ширину поровну */
+            white-space: nowrap;
+        }
 
         /* --- ОСТАЛЬНЫЕ СЕКЦИИ --- */
         section { padding: 8rem 0; position: relative; z-index: 2; }
@@ -193,12 +239,16 @@
         /* --- АДАПТИВ --- */
         @media (max-width: 1200px) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-bg-text { font-size: 15vw; left: 5%; }
+            .hero-glass-card { max-width: 500px; padding: 30px; bottom: 50px; left: 30px; }
         }
         @media (max-width: 900px) {
             header { flex-direction: column; align-items: center; gap: 20px; padding: 20px; }
             .nav-center { display: none; }
             .hero { height: auto; min-height: 100vh; display: flex; flex-direction: column; }
-            .hero-glass-card { position: relative; bottom: auto; left: auto; margin: 150px 20px 40px; max-width: 100%; background: rgba(20,20,20,0.85); }
+            .hero-bg-text { opacity: 0.2; font-size: 22vw; top: 20%; left: 50%; transform: translate(-50%, -50%); }
+            .hero-bg-text span:last-child { margin-left: 0; }
+            .hero-glass-card { position: relative; bottom: auto; left: auto; margin: 150px 20px 40px; max-width: 100%; background: rgba(30,30,30,0.85); }
             .hero-buttons { flex-direction: column; }
             .hero-buttons .btn { width: 100%; }
             .grid-2 { grid-template-columns: 1fr; }
@@ -212,8 +262,14 @@
 
     <!-- ТИТУЛЬНЫЙ БЛОК -->
     <section class="hero">
-        <!-- ВАШЕ ФОТО С ЯНДЕКС.КАРТ -->
+        <!-- Фоновое фото -->
         <img src="https://avatars.mds.yandex.net/get-altay/18118126/2a0000019e118cb31f403a2185379b78e802/XXXL" alt="Интерьер салона" class="hero-bg">
+
+        <!-- Огромный текст ПОД плашкой -->
+        <div class="hero-bg-text">
+            <span>ИСКУССТВО</span>
+            <span>В ДЕТАЛЯХ</span>
+        </div>
 
         <!-- Шапка -->
         <header>
@@ -230,7 +286,7 @@
             <button class="btn-header" onclick="openModal()">Записаться</button>
         </header>
 
-        <!-- Стеклянная плашка в левом нижнем углу -->
+        <!-- Стеклянная плашка, перекрывающая текст -->
         <div class="hero-glass-card">
             <p>«Искусство Красоты» — для тех, кто ценит простоту и качество.<br>Профессиональный уход в атмосфере премиального комфорта.</p>
             <div class="hero-buttons">
