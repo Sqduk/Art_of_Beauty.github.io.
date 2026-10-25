@@ -31,6 +31,7 @@
 <body>
 <a class="skip" href="#main">Перейти к содержимому</a>
 <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
 <header class="site-header" id="header">
   <a class="logo" href="#top" aria-label="Искусство Красоты, на главную">
     <span class="logo__top">Искусство</span>
@@ -44,6 +45,7 @@
   <a class="btn btn--pill" href="#booking">Записаться</a>
   <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu">Меню</button>
 </header>
+
 <div class="menu" id="menu" hidden>
   <nav class="menu__nav" aria-label="Мобильная навигация">
     <a href="#services">Услуги</a>
@@ -56,12 +58,15 @@
     <p>Ежедневно 10:00–20:00<br>ул. Ольги Форш, 13к1</p>
   </div>
 </div>
+
 <main id="main" tabindex="-1">
+
   <section class="hero" id="top" aria-label="Салон «Искусство Красоты»">
     <div class="hero__media">
       <img src="assets/img/hero.webp" alt="Зал салона «Искусство Красоты»: кресла, зеркало и полки с уходом" width="1440" height="1920" fetchpriority="high">
     </div>
     <div class="hero__veil" aria-hidden="true"></div>
+
     <div class="hero__inner">
       <div class="hero__card" id="hero-card">
         <div class="hero__head">
@@ -71,6 +76,7 @@
             <span class="line line--indent"><span class="word word--outline"><span class="word__in">в</span></span> <span class="word"><span class="word__in">деталях</span></span></span>
           </h1>
         </div>
+
         <div class="hero__foot">
           <div class="hero__copy">
             <p class="hero__lead">Для тех, кто ценит простоту и качество. Профессиональный уход в атмосфере премиального комфорта.</p>
@@ -87,6 +93,7 @@
       </div>
     </div>
   </section>
+
   <section class="proof" aria-label="Салон в цифрах">
     <div class="container proof__row">
       <div class="proof__item" data-reveal>
@@ -107,6 +114,7 @@
       </div>
     </div>
   </section>
+
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
       <span class="marquee__item">Стрижка</span><span class="marquee__dot"></span>
@@ -123,6 +131,7 @@
       <span class="marquee__item">Косметология</span><span class="marquee__dot"></span>
     </div>
   </div>
+
   <section class="about section" id="about">
     <div class="container about__grid">
       <div class="about__text">
@@ -136,6 +145,7 @@
           </a>
         </div>
       </div>
+
       <figure class="about__media" data-reveal>
         <div class="about__frame" data-parallax="0.07">
           <img src="assets/img/room.webp" alt="Интерьер салона: рабочее место у зеркала и деревянные полки" width="900" height="1125" loading="lazy">
@@ -144,6 +154,7 @@
       </figure>
     </div>
   </section>
+
   <section class="services section" id="services">
     <div class="container">
       <header class="services__head">
@@ -153,6 +164,7 @@
         </div>
         <p class="services__intro" data-reveal>Три направления и одна команда. Стоимость зависит от объёма работы, точную цену называем до начала.</p>
       </header>
+
       <ul class="price-list">
         <li class="price-row" data-img="assets/img/hair.webp" data-reveal>
           <a href="#booking" data-service="Парикмахерские услуги">
@@ -188,9 +200,11 @@
           </a>
         </li>
       </ul>
+
       <p class="services__note" data-reveal><span aria-hidden="true">◆</span> При записи на две услуги и более скидка 15%</p>
     </div>
   </section>
+
   <section class="detail" id="atmosphere" aria-labelledby="detail-title">
     <div class="detail__media">
       <img src="assets/img/face.webp" alt="Косметолог наносит уход на лицо клиентки" width="1200" height="2133" data-parallax="0.13">
@@ -204,12 +218,14 @@
       </div>
     </div>
   </section>
+
   <section class="booking section" id="booking" aria-labelledby="booking-title">
     <div class="container booking__grid">
       <div class="booking__intro">
         <p class="kicker" data-reveal><span class="kicker__dot" aria-hidden="true"></span>Запись</p>
         <h2 class="display" id="booking-title" data-split data-reveal>Выберите время, остальное сделаем мы.</h2>
         <p class="booking__lead" data-reveal>Оставьте телефон и удобный час. Мы перезвоним, уточним услугу и мастера.</p>
+
         <ul class="contacts">
           <li data-reveal>
             <span class="contacts__label">Адрес</span>
@@ -225,6 +241,7 @@
           </li>
         </ul>
       </div>
+
       <form class="form" id="booking-form" novalidate data-reveal>
         <p class="form__title">Заявка на визит</p>
         <div class="field">
@@ -259,6 +276,7 @@
             </select>
           </div>
         </div>
+
         <button class="btn btn--gold btn--wide" type="submit" data-magnet>
           Отправить в WhatsApp
           <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -269,6 +287,7 @@
     </div>
   </section>
 </main>
+
 <footer class="site-footer" id="contacts">
   <div class="container">
     <div class="site-footer__top">
@@ -300,9 +319,11 @@
     </div>
   </div>
 </footer>
+
 <div class="hover-img" id="hover-img" aria-hidden="true">
   <img id="hover-img-el" alt="" width="300" height="400" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 </div>
+
 <script src="assets/main.js" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BeautySalon","name":"Искусство Красоты","telephone":"+7 965 095-55-61","address":{"@type":"PostalAddress","streetAddress":"ул. Ольги Форш, 13к1","addressLocality":"Санкт-Петербург","addressCountry":"RU"},"openingHours":"Mo-Su 10:00-20:00","priceRange":"от 600 ₽"}
