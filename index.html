@@ -5,398 +5,562 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art of Beauty | Premium Beauty Salon in Saint Petersburg</title>
     
+    <!-- Подключаем шрифты: Inter для основного текста, Oswald для заголовков -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ПЕРЕМЕННЫЕ --- */
+        /* --- ПЕРЕМЕННЫЕ (Палитра по референсу) --- */
         :root {
-            --bg-deep: #1a1a1a; 
-            --bg-card: rgba(30, 30, 30, 0.7); 
-            --border-glass: rgba(201, 168, 124, 0.2); 
+            --bg-dark: #121212;        /* Глубокий графитовый фон */
+            --bg-card: #1e1e1e;        /* Фон карточек */
+            --bg-light-grey: #2a2a2a;  /* Для блоков статистики */
+            --border-color: rgba(255, 255, 255, 0.08); /* Тонкие рамки */
             
-            --text-main: #f5f5f5;
-            --text-muted: #a0a0a0;
+            --text-main: #f5f5f5;      /* Белый текст */
+            --text-muted: #a0a0a0;     /* Серый текст */
             
-            --gold-main: #d4af37; 
-            --gold-light: #f3e5ab;
-            --gold-dark: #aa8c2c;
+            --accent: #e0e0e0;         /* Серебристый акцент для кнопок */
+            --accent-hover: #ffffff;
             
             --font-heading: 'Oswald', sans-serif;
-            --font-body: 'Oswald', sans-serif;
-            --font-accent: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
         }
 
         /* --- БАЗА --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background-color: var(--bg-deep);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: var(--font-body);
-            font-weight: 300;
-            line-height: 1.7;
-            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 1.6;
+            font-size: 16px;
             overflow-x: hidden;
-            position: relative;
         }
 
-        h1, h2, h3 { font-family: var(--font-heading); font-weight: 500; text-transform: uppercase; }
-        p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1.1rem; }
         a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
 
-        .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
-
-        /* --- КНОПКИ --- */
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
-            color: #111;
-            border-radius: 8px;
-            font-family: var(--font-heading);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            font-size: 1rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            border: none;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            text-align: center;
-        }
-        .btn:hover { 
-            background: linear-gradient(135deg, var(--gold-light), var(--gold-main));
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-            transform: translateY(-2px);
-        }
+        /* Заголовки */
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 500; text-transform: uppercase; line-height: 1.1; }
         
-        .btn-outline {
-            background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: none;
-        }
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #fff;
-        }
+        .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
 
-        /* --- HERO-БЛОК (ТОЧНАЯ КОПИЯ) --- */
-        .hero {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            filter: brightness(0.85);
-        }
-
-        /* Огромный текст ПОД плашкой */
-        .hero-bg-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: var(--font-heading);
-            font-size: 13vw;
-            font-weight: 700;
-            line-height: 0.85;
-            color: #ffffff;
-            z-index: 1; /* Лежит под плашкой */
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            white-space: nowrap;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .hero-bg-text span:last-child {
-            margin-left: 8vw;
-        }
-
-        /* Шапка */
+        /* --- ШАПКА (Header) --- */
         header {
             position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
-            padding: 30px 50px;
-            display: flex; justify-content: space-between; align-items: flex-start;
+            padding: 30px 0;
+        }
+        .header-inner {
+            display: flex; justify-content: space-between; align-items: center;
         }
         
-        .logo { 
-            font-family: var(--font-heading); font-weight: 500; font-size: 1.6rem;
-            color: #fff; letter-spacing: 2px; text-transform: uppercase; line-height: 1.1;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
         }
-        .logo span { color: var(--gold-main); font-size: 1rem; display: block; letter-spacing: 2px; margin-top: 4px; }
-        
-        .nav-center { display: flex; gap: 40px; margin-top: 5px; }
-        .nav-center a { font-family: var(--font-heading); font-size: 1rem; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: color 0.3s; }
-        .nav-center a:hover { color: var(--gold-main); }
+
+        .nav-links {
+            display: flex; gap: 40px;
+        }
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: #fff; }
 
         .btn-header {
-            border: 1px solid rgba(255,255,255,0.7); background: transparent; color: #fff;
-            padding: 10px 24px; font-family: var(--font-heading); font-size: 0.9rem;
-            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-            border-radius: 6px; transition: all 0.3s;
-        }
-        .btn-header:hover { background: rgba(255,255,255,0.1); }
-
-        /* Стеклянная плашка (Слева внизу) */
-        .hero-glass-card {
-            position: absolute;
-            bottom: 80px; 
-            left: 50px; 
-            z-index: 10; 
-            width: 100%; 
-            max-width: 500px; 
-            
-            background: rgba(200, 180, 150, 0.2); 
-            backdrop-filter: blur(35px) saturate(120%); 
-            -webkit-backdrop-filter: blur(35px) saturate(120%);
-            
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px; 
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .hero-glass-card p {
+            display: flex; align-items: center; gap: 10px;
+            background: var(--accent);
+            color: #111;
+            padding: 12px 24px;
+            border-radius: 30px;
             font-family: var(--font-body);
-            font-size: 1.1rem; 
-            font-weight: 400; 
-            line-height: 1.5;
-            color: #fff; 
-            margin-bottom: 30px; 
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none; cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-header:hover { background: var(--accent-hover); }
+
+        /* --- HERO SECTION (Главный экран) --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            overflow: hidden;
         }
 
-        .hero-buttons { 
-            display: flex; 
-            gap: 15px; 
+        /* Фоновое фото (справа) */
+        .hero-bg {
+            position: absolute;
+            top: 0; right: 0;
+            width: 55%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            /* Плавное растворение фото влево */
+            mask-image: linear-gradient(to right, transparent, black 40%);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
         }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 60%;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 9vw; /* Огромный размер */
+            line-height: 0.9;
+            letter-spacing: -1px;
+            color: var(--text-main);
+            margin-bottom: 30px;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .btn-view {
+            background: var(--accent);
+            color: #111;
+            padding: 16px 32px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            border: none; cursor: pointer;
+            display: flex; align-items: center; gap: 15px;
+            transition: background 0.3s;
+        }
+        .btn-view:hover { background: var(--accent-hover); }
+
+        .btn-download {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            display: flex; align-items: center; gap: 10px;
+            background: transparent; border: none; cursor: pointer;
+        }
+        .btn-download:hover { color: var(--text-muted); }
+
+        /* Блок "Freelance" справа */
+        .hero-badge {
+            position: absolute;
+            right: 50px;
+            bottom: 15%;
+            z-index: 3;
+            text-align: right;
+        }
+        .hero-badge .available {
+            font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 5px;
+        }
+        .hero-badge .status {
+            font-family: var(--font-heading); font-size: 24px; font-weight: 500; letter-spacing: 1px;
+        }
+
+        /* --- БЛОК СТАТИСТИКИ --- */
+        .stats-section {
+            padding: 0 40px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+        .stats-box {
+            background: var(--bg-light-grey);
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 40px;
+        }
+        .stat-item {
+            text-align: center;
+            border-right: 1px solid var(--border-color);
+        }
+        .stat-item:last-child { border-right: none; }
         
-        .hero-buttons .btn { 
-            padding: 14px 24px; 
-            font-size: 0.95rem; 
-            flex: 1; 
-            white-space: nowrap;
+        .stat-icon { font-size: 24px; margin-bottom: 15px; color: var(--text-main); }
+        .stat-number { font-family: var(--font-heading); font-size: 48px; line-height: 1; margin-bottom: 5px; }
+        .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+
+        /* --- СЕКЦИЯ УСЛУГ (Портфолио) --- */
+        .services-section {
+            padding: 100px 0;
+        }
+        .section-header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+        .section-header h2 {
+            font-size: 24px; letter-spacing: 1px;
+        }
+        .section-header a {
+            font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .section-header a:hover { color: #fff; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
 
-        /* --- ОСТАЛЬНЫЕ СЕКЦИИ --- */
-        section { padding: 8rem 0; position: relative; z-index: 2; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .glass { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid var(--border-glass); border-radius: 16px; padding: 3rem; }
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+        .service-card:hover { transform: translateY(-5px); }
+
+        .service-image-wrap {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+        .service-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover .service-img { transform: scale(1.05); }
+
+        .service-info {
+            padding: 30px;
+            display: flex; flex-direction: column; flex-grow: 1;
+        }
+        .service-info h3 {
+            font-size: 24px; margin-bottom: 10px;
+            color: #fff;
+        }
+        .service-desc {
+            color: var(--text-muted); font-size: 14px; margin-bottom: 25px; flex-grow: 1;
+        }
+        .service-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+        .service-price {
+            font-size: 14px; font-weight: 500; text-transform: uppercase; color: var(--text-main);
+        }
+        .btn-circle {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: center;
+            background: transparent; color: #fff;
+            cursor: pointer; transition: background 0.3s;
+        }
+        .btn-circle:hover { background: var(--accent); color: #111; border-color: var(--accent); }
+
+        /* Карточка спецпредложения */
+        .promo-card {
+            background: linear-gradient(135deg, #1e1e1e, #121212);
+            border: 1px solid var(--border-color);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 40px;
+        }
+        .promo-card h3 { font-size: 28px; margin-bottom: 15px; }
+        .promo-card p { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
+
+        /* --- ФУТЕР (Призыв к действию) --- */
+        .footer-cta {
+            padding: 100px 40px;
+        }
+        .cta-box {
+            background: var(--bg-light-grey);
+            border-radius: 16px;
+            padding: 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        .cta-content h2 {
+            font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px;
+        }
+        .cta-content p { color: var(--text-muted); font-size: 16px; margin-bottom: 30px; max-width: 400px; }
         
-        .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 1.5rem; }
-        .services-header h2 { font-size: 2.8rem; margin-bottom: 0; text-align: left; color: var(--gold-light); }
-        .services-header p { margin: 0; text-align: right; font-size: 1.1rem; max-width: 400px; }
+        .cta-contact-info {
+            display: flex; flex-direction: column; gap: 15px;
+            border-left: 1px solid var(--border-color);
+            padding-left: 40px;
+        }
+        .cta-contact-info div { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
+        .cta-contact-info div:hover { color: #fff; }
 
-        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-
-        .service-item { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.4s; }
-        .service-item:hover { transform: translateY(-8px); border-color: var(--gold-main); }
-        .service-img { width: 100%; height: 220px; object-fit: cover; }
-        .service-info { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; background: #1e1e1e; }
-        .service-info h3 { font-size: 1.3rem; color: var(--gold-light); margin-bottom: 0.5rem; }
-        .service-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1; }
-        .service-footer { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem; }
-        .service-price { font-family: var(--font-heading); color: var(--gold-main); font-size: 1.1rem; }
-        .service-footer .btn { padding: 12px; font-size: 0.85rem; width: 100%; }
-
-        .promo-item { background: linear-gradient(135deg, rgba(40, 35, 20, 0.9), rgba(20, 20, 20, 0.9)); border: 1px solid var(--gold-main); justify-content: center; align-items: center; text-align: center; padding: 2rem; }
-        .promo-item h3 { font-size: 1.3rem; color: var(--gold-light); margin-bottom: 1rem; }
-        .promo-item p { font-size: 0.9rem; color: var(--text-main); margin-bottom: 1.5rem; }
-
-        .contact-info p { margin-bottom: 1.2rem; font-size: 1.1rem; }
-        .contact-info strong { color: var(--gold-light); text-transform: uppercase; font-size: 0.9rem;}
-        .contact-info a { color: var(--gold-main); }
-        .map-container { margin-top: 2rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-glass); }
-        .map-container img { width: 100%; display: block; filter: grayscale(0.5); }
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 30px 40px; border-top: 1px solid var(--border-color);
+            font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
+        }
+        .footer-socials { display: flex; gap: 20px; }
+        .footer-socials a:hover { color: #fff; }
 
         /* --- МОДАЛЬНОЕ ОКНО --- */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(10px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
-        .modal-content { background: #1c1c1c; border: 1px solid var(--gold-main); border-radius: 16px; width: 100%; max-width: 650px; padding: 3rem; position: relative; max-height: 90vh; overflow-y: auto; }
-        .modal-close { position: absolute; top: 20px; right: 25px; background: none; border: none; color: var(--gold-main); font-size: 2.2rem; cursor: pointer; }
-        .modal-content h3 { margin-bottom: 2rem; text-align: center; color: var(--gold-light); font-size: 2rem; }
-        .form-section-title { font-family: var(--font-heading); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-main); margin: 2rem 0 1rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px; }
-        .checkbox-group { display: flex; flex-direction: column; gap: 0.8rem; }
-        .checkbox-label { display: flex; align-items: center; gap: 15px; padding: 15px; border: 1px solid var(--border-glass); border-radius: 8px; cursor: pointer; font-size: 1.1rem; color: var(--text-muted); }
-        .checkbox-label:hover { border-color: var(--gold-main); color: var(--text-main); }
-        .checkbox-label input[type="checkbox"] { accent-color: var(--gold-main); width: 22px; height: 22px; }
-        .time-select, .phone-input { width: 100%; padding: 18px 20px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-glass); border-radius: 8px; color: var(--text-main); font-family: var(--font-body); font-size: 1.1rem; outline: none; margin-top: 0.8rem; }
-        .modal-submit { width: 100%; margin-top: 2.5rem; padding: 20px; font-size: 1.1rem; }
+        .modal-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 600px; padding: 40px; position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 20px; right: 25px; background: none; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; }
+        .modal-close:hover { color: #fff; }
+        .modal-content h3 { margin-bottom: 30px; text-align: center; font-size: 28px; }
+        
+        .form-section-title { font-family: var(--font-heading); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin: 25px 0 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+        .checkbox-label { display: flex; align-items: center; gap: 15px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; font-size: 15px; color: var(--text-muted); transition: all 0.3s; }
+        .checkbox-label:hover { border-color: var(--text-main); color: var(--text-main); }
+        .checkbox-label input[type="checkbox"] { accent-color: var(--text-main); width: 18px; height: 18px; }
+        
+        .time-select, .phone-input { width: 100%; padding: 16px 20px; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main); font-family: var(--font-body); font-size: 15px; outline: none; margin-top: 10px; }
+        .time-select:focus, .phone-input:focus { border-color: var(--text-main); }
+        .modal-submit { width: 100%; margin-top: 30px; padding: 18px; font-size: 15px; }
 
         /* --- АДАПТИВ --- */
-        @media (max-width: 1200px) {
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 12vw; }
+            .hero-content { width: 100%; }
+            .hero-bg { width: 100%; mask-image: linear-gradient(to bottom, transparent, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%); opacity: 0.3; }
+            .stats-box { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            .stat-item:nth-child(2) { border-right: none; }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-bg-text { font-size: 15vw; }
-            .hero-glass-card { max-width: 450px; padding: 30px; }
+            .cta-box { flex-direction: column; align-items: flex-start; gap: 40px; padding: 40px; }
+            .cta-contact-info { border-left: none; padding-left: 0; }
         }
-        @media (max-width: 900px) {
-            header { flex-direction: column; align-items: center; gap: 20px; padding: 20px; }
-            .nav-center { display: none; }
-            .hero { height: auto; min-height: 100vh; display: flex; flex-direction: column; }
-            .hero-bg-text { opacity: 0.2; font-size: 22vw; top: 20%; left: 50%; transform: translate(-50%, -50%); }
-            .hero-bg-text span:last-child { margin-left: 0; }
-            
-            .hero-glass-card { 
-                position: relative; 
-                bottom: auto; left: auto; 
-                width: calc(100% - 40px); 
-                max-width: 100%; 
-                margin: 150px 20px 40px; 
-                padding: 30px;
-            }
-            .hero-buttons { flex-direction: column; }
-            .hero-buttons .btn { width: 100%; }
-            .grid-2 { grid-template-columns: 1fr; }
-            .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .services-header p { text-align: left; }
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 16vw; }
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+            .stats-box { grid-template-columns: 1fr; padding: 20px; }
+            .stat-item { border-right: none; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+            .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
             .services-grid { grid-template-columns: 1fr; }
+            .cta-content h2 { font-size: 2.5rem; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ТИТУЛЬНЫЙ БЛОК -->
-    <section class="hero">
-        <!-- Фоновое фото -->
-        <img src="https://avatars.mds.yandex.net/get-altay/18118126/2a0000019e118cb31f403a2185379b78e802/XXXL" alt="Интерьер салона" class="hero-bg">
-
-        <!-- Огромный текст по центру -->
-        <div class="hero-bg-text">
-            <span>ИСКУССТВО</span>
-            <span>В ДЕТАЛЯХ</span>
-        </div>
-
-        <!-- Шапка -->
-        <header>
-            <div class="logo">
-                ИСКУССТВО<br><span>КРАСОТЫ</span>
-            </div>
+    <!-- ШАПКА -->
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">ИСКУССТВО</a>
             
-            <nav class="nav-center">
+            <nav class="nav-links">
                 <a href="#services">Услуги</a>
                 <a href="#about">О нас</a>
                 <a href="#contacts">Контакты</a>
             </nav>
 
-            <button class="btn-header" onclick="openModal()">Записаться</button>
-        </header>
+            <button class="btn-header" onclick="openModal()">
+                Записаться 
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </button>
+        </div>
+    </header>
 
-        <!-- Стеклянная плашка (Слева внизу) -->
-        <div class="hero-glass-card">
-            <p>«Искусство Красоты» — для тех, кто ценит простоту и качество.<br>Профессиональный уход в атмосфере премиального комфорта.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-outline" onclick="openModal()">Записаться</button>
-                <button class="btn" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Посмотреть цены</button>
+    <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
+    <section class="hero">
+        <!-- Фото мастера (используем ссылку из вашего последнего скриншота) -->
+        <img src="https://avatars.mds.yandex.net/get-altay/18118126/2a0000019e118cb31f403a2185379b78e802/XXXL" alt="Мастер салона" class="hero-bg">
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-subtitle">ПРЕМИАЛЬНЫЙ САЛОН КРАСОТЫ</div>
+                <h1>ИСКУССТВО<br>В ДЕТАЛЯХ</h1>
+                <p class="hero-desc">«Искусство Красоты» — для тех, кто ценит простоту и качество. Профессиональный уход в атмосфере премиального комфорта.</p>
+                
+                <div class="hero-actions">
+                    <button class="btn-view" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                        Посмотреть услуги
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                    <button class="btn-download" onclick="openModal()">
+                        Записаться онлайн
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-badge">
+            <div class="available">РЕЙТИНГ 4.9</div>
+            <div class="status">232 ОТЗЫВА</div>
+        </div>
+    </section>
+
+    <!-- БЛОК СТАТИСТИКИ -->
+    <section class="stats-section">
+        <div class="stats-box">
+            <div class="stat-item">
+                <div class="stat-icon">✦</div>
+                <div class="stat-number">10+</div>
+                <div class="stat-label">ЛЕТ ОПЫТА</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">👤</div>
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">ДОВОЛЬНЫХ КЛИЕНТОВ</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-number">15+</div>
+                <div class="stat-label">МАСТЕРОВ</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-number">3</div>
+                <div class="stat-label">НАПРАВЛЕНИЯ</div>
             </div>
         </div>
     </section>
 
-    <!-- ОСТАЛЬНОЙ КОНТЕНТ -->
-    <main class="container">
-        
-        <!-- О НАС -->
-        <section id="about">
-            <div class="grid-2">
-                <div class="glass">
-                    <h3 style="color: var(--gold-light); margin-bottom: 1.5rem; font-weight: 400; font-size: 1.8rem;">Об атмосфере</h3>
-                    <p>Гости отмечают уютный интерьер и внимательных мастеров. Мы находимся в Калининском районе, недалеко от метро Гражданский проспект.</p>
-                    <p>Здесь можно не просто подстричься, но и отдохнуть от городской суеты. Работаем ежедневно с 10:00 до 20:00.</p>
-                </div>
-                <div class="glass" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                    <div style="font-family: var(--font-accent); font-style: italic; font-size: 6rem; color: var(--gold-main); line-height: 1; margin-bottom: 1rem;">4.9</div>
-                    <p style="margin: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; font-family: var(--font-heading); color: var(--text-main);">Средняя оценка <br> на основе 232 отзывов</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- УСЛУГИ -->
-        <section id="services">
-            <div class="services-header">
-                <h2>Наши услуги</h2>
-                <p>Актуальные цены. Точную стоимость и запись уточняйте по телефону.</p>
+    <!-- УСЛУГИ -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>НАШИ УСЛУГИ</h2>
+                <a href="#" onclick="openModal(); return false;">Записаться на все <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
 
             <div class="services-grid">
-                <div class="service-item">
-                    <img src="https://i.pinimg.com/236x/9a/ab/49/9aab4928df5bde4eba57612af83d4f36.jpg" alt="Парикмахерские услуги" class="service-img">
+                <!-- Услуга 1 -->
+                <div class="service-card">
+                    <div class="service-image-wrap">
+                        <img src="https://i.pinimg.com/236x/9a/ab/49/9aab4928df5bde4eba57612af83d4f36.jpg" alt="Парикмахерские услуги" class="service-img">
+                    </div>
                     <div class="service-info">
-                        <h3>Парикмахерские услуги</h3>
+                        <h3>ПАРИКМАХЕРСКИЕ УСЛУГИ</h3>
                         <p class="service-desc">Стрижки, сложное окрашивание, уходы и вечерние укладки.</p>
-                        <div class="service-footer">
+                        <div class="service-bottom">
                             <span class="service-price">от 1 500 ₽</span>
-                            <button class="btn" onclick="openModal('Стрижка')">Записаться</button>
+                            <button class="btn-circle" onclick="openModal('Стрижка')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="service-item">
-                    <img src="https://i.pinimg.com/1200x/e2/9e/02/e29e029f74ca5ec04692e0bca3b7ba7f.jpg" alt="Маникюр и педикюр" class="service-img">
+
+                <!-- Услуга 2 -->
+                <div class="service-card">
+                    <div class="service-image-wrap">
+                        <img src="https://i.pinimg.com/1200x/e2/9e/02/e29e029f74ca5ec04692e0bca3b7ba7f.jpg" alt="Маникюр и педикюр" class="service-img">
+                    </div>
                     <div class="service-info">
-                        <h3>Маникюр и педикюр</h3>
+                        <h3>МАНИКЮР И ПЕДИКЮР</h3>
                         <p class="service-desc">Аппаратный маникюр, покрытие гель-лаком, наращивание и СПА-уход.</p>
-                        <div class="service-footer">
+                        <div class="service-bottom">
                             <span class="service-price">от 1 200 ₽</span>
-                            <button class="btn" onclick="openModal('Маникюр')">Записаться</button>
+                            <button class="btn-circle" onclick="openModal('Маникюр')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="service-item">
-                    <img src="https://i.pinimg.com/736x/b8/a5/ff/b8a5ff35e8dfeb9af2df177654751df1.jpg" alt="Косметология" class="service-img">
+
+                <!-- Услуга 3 -->
+                <div class="service-card">
+                    <div class="service-image-wrap">
+                        <img src="https://i.pinimg.com/736x/b8/a5/ff/b8a5ff35e8dfeb9af2df177654751df1.jpg" alt="Косметология" class="service-img">
+                    </div>
                     <div class="service-info">
-                        <h3>Косметология</h3>
+                        <h3>КОСМЕТОЛОГИЯ</h3>
                         <p class="service-desc">Чистка лица, пилинги, массаж лица и коррекция бровей.</p>
-                        <div class="service-footer">
+                        <div class="service-bottom">
                             <span class="service-price">от 2 000 ₽</span>
-                            <button class="btn" onclick="openModal('Уход за лицом')">Записаться</button>
+                            <button class="btn-circle" onclick="openModal('Уход за лицом')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="service-item promo-item">
-                    <h3>Спецпредложение</h3>
-                    <p>При записи на две и более услуги — <span style="color:var(--gold-main); font-family:var(--font-accent); font-style:italic;">скидка 15%</span></p>
-                    <button class="btn" onclick="openModal()">Воспользоваться</button>
+
+                <!-- Спецпредложение (вместо 4-й карточки) -->
+                <div class="service-card promo-card">
+                    <h3>СПЕЦПРЕДЛОЖЕНИЕ</h3>
+                    <p>При записи на две и более услуги — скидка 15%</p>
+                    <button class="btn-view" onclick="openModal()" style="padding: 12px 24px; font-size: 13px;">Воспользоваться</button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- КОНТАКТЫ -->
-        <section id="contacts">
-            <h2 style="text-align: center; color: var(--gold-light); font-size: 2.8rem; margin-bottom: 3rem;">Контакты</h2>
-            <div class="grid-2">
-                <div class="glass contact-info">
-                    <p><strong>Адрес:</strong> Санкт-Петербург, ул. Ольги Форш, 13к1 (1 этаж)</p>
-                    <p><strong>Телефон:</strong> <a href="tel:+79650955561">+7 (965) 095-55-61</a></p>
-                    <p><strong>Режим работы:</strong> Ежедневно 10:00 – 20:00</p>
-                    <p><strong>Метро:</strong> Гражданский проспект</p>
-                    <div class="map-container">
-                        <img src="map.jpg" alt="Карта расположения салона" style="background: #1e232d; min-height: 250px; object-fit: cover;">
+    <!-- ФУТЕР / CTA -->
+    <footer class="footer-cta" id="contacts">
+        <div class="container" style="padding: 0;">
+            <div class="cta-box">
+                <div class="cta-content">
+                    <h2>ОСТАЛИСЬ ВОПРОСЫ?</h2>
+                    <p>Позвоните нам или оставьте заявку, и мы перезвоним для подтверждения времени.</p>
+                    <button class="btn-view" onclick="openModal()">Оставить заявку</button>
+                </div>
+                
+                <div class="cta-contact-info">
+                    <div>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Санкт-Петербург, ул. Ольги Форш, 13к1
+                    </div>
+                    <div>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        +7 (965) 095-55-61
+                    </div>
+                    <div>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Ежедневно 10:00 – 20:00
                     </div>
                 </div>
-                <div class="glass" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--gold-light); font-size: 1.8rem;">Остались вопросы?</h3>
-                    <p>Позвоните нам или оставьте заявку, и мы перезвоним для подтверждения времени.</p>
-                    <button class="btn" onclick="openModal()" style="margin-top: 2rem;">Оставить заявку</button>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>© 2026 САЛОН «ИСКУССТВО КРАСОТЫ»</div>
+                <div class="footer-socials">
+                    <a href="#">VK</a>
+                    <a href="#">TG</a>
+                    <a href="#">WA</a>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid rgba(212, 175, 55, 0.2); color: var(--text-muted); font-size: 0.9rem; letter-spacing: 2px;">
-        <div class="container">
-            <p style="margin: 0;">© 2026 Салон «Искусство Красоты» · ул. Ольги Форш, 13к1</p>
         </div>
     </footer>
 
@@ -430,12 +594,13 @@
                 </select>
                 <div class="form-section-title">Ваш номер телефона</div>
                 <input type="tel" class="phone-input" placeholder="+7 (___) ___-__-__" required>
-                <button type="submit" class="btn modal-submit">Отправить заявку</button>
+                <button type="submit" class="btn-view modal-submit">Отправить заявку</button>
             </form>
         </div>
     </div>
 
     <script>
+        // Модальное окно
         function openModal(serviceName = null) {
             document.querySelectorAll('input[name="service"]').forEach(chk => chk.checked = false);
             if (serviceName) {
