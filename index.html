@@ -7,7 +7,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Добавили Playfair Display для рукописного акцента -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -23,6 +24,7 @@
             
             --font-heading: 'Oswald', sans-serif;
             --font-body: 'Inter', sans-serif;
+            --font-accent: 'Playfair Display', serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,10 +44,9 @@
 
         h1, h2, h3 { font-family: var(--font-heading); font-weight: 500; text-transform: uppercase; line-height: 1; }
         
-        /* Увеличили максимальную ширину контейнера и уменьшили боковые отступы */
         .container { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 60px; position: relative; z-index: 2; }
 
-        /* --- ШАПКА --- */
+        /* --- ШАПКА (НОВЫЙ ЛОГОТИП) --- */
         header {
             position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
             padding: 30px 0;
@@ -53,15 +54,33 @@
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
         
         .logo {
-            font-family: var(--font-heading); 
-            font-size: 48px; 
-            font-weight: 700;
-            letter-spacing: 2px; 
-            color: #fff;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
             text-transform: uppercase;
             transition: opacity 0.3s;
         }
         .logo:hover { opacity: 0.8; }
+
+        .logo-top {
+            font-family: var(--font-heading);
+            font-size: 32px; /* Уменьшили в 1.5 раза (было 48px) */
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .logo-bottom {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 24px; /* Акцентный шрифт */
+            font-weight: 500;
+            color: var(--accent); /* Используем наш акцентный цвет */
+            text-transform: none; /* Убираем капс для рукописного шрифта */
+            margin-top: -2px; /* Чуть ближе к верхней строке */
+            letter-spacing: 2px;
+            margin-left: 2px;
+        }
 
         .nav-links { display: flex; gap: 40px; }
         .nav-links a {
@@ -107,7 +126,7 @@
             position: relative; 
             z-index: 2; 
             width: 55%; 
-            max-width: 800px; /* Увеличили ширину текстового блока */
+            max-width: 800px; 
         }
 
         .hero-subtitle {
@@ -115,7 +134,6 @@
             letter-spacing: 2px; color: var(--text-muted); margin-bottom: 20px;
         }
 
-        /* Уменьшили размер шрифта, чтобы текст ровно встал в 2 строки */
         .hero h1 {
             font-size: 5.5vw; 
             line-height: 1.1; 
@@ -148,15 +166,13 @@
         }
         .btn-download:hover { color: var(--text-muted); }
 
-        /* --- ОБНОВЛЕННЫЙ РЕЙТИНГ (Контрастный) --- */
+        /* --- РЕЙТИНГ --- */
         .hero-badge {
             position: absolute; 
-            right: 60px; /* Выровняли по краю контейнера */
+            right: 60px; 
             bottom: 15%; 
             z-index: 3; 
             text-align: right;
-            
-            /* Добавили темную стеклянную подложку для читаемости */
             background: rgba(18, 18, 18, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -173,13 +189,13 @@
         }
         .hero-badge .status {
             font-family: var(--font-heading); 
-            font-size: 36px; /* Увеличили шрифт */
+            font-size: 36px; 
             font-weight: 700; 
             letter-spacing: 1px;
             color: #ffffff;
         }
 
-        /* --- БЛОК СТАТИСТИКИ (ПОЛУМАТОВОЕ СТЕКЛО) --- */
+        /* --- БЛОК СТАТИСТИКИ --- */
         .stats-section {
             padding: 0 60px;
             margin-top: -80px; 
@@ -315,7 +331,8 @@
         @media (max-width: 1200px) {
             .container, .stats-section, .footer-cta, .footer-bottom { padding-left: 30px; padding-right: 30px; }
             .hero h1 { font-size: 6.5vw; }
-            .logo { font-size: 36px; }
+            .logo-top { font-size: 28px; }
+            .logo-bottom { font-size: 20px; }
             .hero-badge { right: 30px; }
         }
         @media (max-width: 1024px) {
@@ -331,7 +348,8 @@
         @media (max-width: 768px) {
             .container, .stats-section, .footer-cta, .footer-bottom { padding-left: 20px; padding-right: 20px; }
             .nav-links { display: none; }
-            .logo { font-size: 28px; }
+            .logo-top { font-size: 24px; }
+            .logo-bottom { font-size: 18px; }
             .hero h1 { font-size: 12vw; }
             .hero-actions { flex-direction: column; align-items: flex-start; }
             .stats-section { margin-top: -40px; }
@@ -342,10 +360,7 @@
             .cta-content h2 { font-size: 2.5rem; }
             .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
             
-            .hero-badge { 
-                right: 20px; bottom: 5%; 
-                padding: 15px 20px; 
-            }
+            .hero-badge { right: 20px; bottom: 5%; padding: 15px 20px; }
             .hero-badge .status { font-size: 28px; }
         }
     </style>
@@ -355,7 +370,11 @@
     <!-- ШАПКА -->
     <header>
         <div class="container header-inner">
-            <a href="./" class="logo">ИСКУССТВО КРАСОТЫ</a>
+            <!-- Обновленный логотип -->
+            <a href="./" class="logo">
+                <span class="logo-top">ИСКУССТВО</span>
+                <span class="logo-bottom">красоты</span>
+            </a>
             
             <nav class="nav-links">
                 <a href="#services">Услуги</a>
@@ -377,7 +396,6 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-subtitle">ПРЕМИАЛЬНЫЙ САЛОН КРАСОТЫ</div>
-                <!-- Теперь заголовок ровно в 2 строки -->
                 <h1>ИСКУССТВО<br>В ДЕТАЛЯХ</h1>
                 <p class="hero-desc">«Искусство Красоты» — для тех, кто ценит простоту и качество. Профессиональный уход в атмосфере премиального комфорта.</p>
                 
@@ -394,7 +412,6 @@
             </div>
         </div>
 
-        <!-- Обновленный контрастный рейтинг -->
         <div class="hero-badge">
             <div class="available">РЕЙТИНГ</div>
             <div class="status">4.9 ★</div>
@@ -567,6 +584,4 @@
 
     <script>
         function openModal(serviceName = null) {
-            document.querySelectorAll('input[name="service"]').forEach(chk => chk.checked = false);
-            if (serviceName) {
-                document.querySelectorAll('input[name="service
+            document.querySelectorAll('input[name="service"]').forEach(ch
