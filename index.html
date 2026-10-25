@@ -40,9 +40,9 @@
         a { color: inherit; text-decoration: none; }
         ul { list-style: none; }
 
-        h1, h2, h3 { font-family: var(--font-heading); font-weight: 500; text-transform: uppercase; line-height: 1.1; }
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 500; text-transform: uppercase; line-height: 1; }
         
-        .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+        .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
 
         /* --- ШАПКА --- */
         header {
@@ -52,7 +52,7 @@
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
         
         .logo {
-            font-family: var(--font-heading); font-size: 28px; font-weight: 700;
+            font-family: var(--font-heading); font-size: 24px; font-weight: 700;
             letter-spacing: 2px; color: #fff;
         }
 
@@ -74,35 +74,55 @@
         }
         .btn-header:hover { background: var(--accent-hover); }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION (ИСПРАВЛЕННЫЙ) --- */
         .hero {
-            position: relative; min-height: 100vh;
-            display: flex; align-items: center;
-            padding-top: 100px; overflow: hidden;
+            position: relative; 
+            min-height: 100vh;
+            display: flex; 
+            align-items: center;
+            padding-top: 80px; /* Отступ от шапки */
+            overflow: hidden;
         }
 
+        /* Фоновое фото (занимает правую часть) */
         .hero-bg {
-            position: absolute; top: 0; right: 0; width: 55%; height: 100%;
-            object-fit: cover; z-index: 0;
-            mask-image: linear-gradient(to right, transparent, black 40%);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
+            position: absolute; 
+            top: 0; 
+            right: 0; 
+            width: 55%; 
+            height: 100%;
+            object-fit: cover; 
+            z-index: 0;
+            /* Плавный градиент слева направо, чтобы текст читался */
+            mask-image: linear-gradient(to right, transparent 0%, black 30%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
         }
 
-        .hero-content { position: relative; z-index: 2; width: 60%; }
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+            width: 55%; 
+            /* Ограничиваем ширину текста, чтобы он не наезжал на фото */
+            max-width: 700px;
+        }
 
         .hero-subtitle {
             font-size: 14px; font-weight: 500; text-transform: uppercase;
             letter-spacing: 2px; color: var(--text-muted); margin-bottom: 20px;
         }
 
+        /* Уменьшили шрифт и добавили переносы для красоты */
         .hero h1 {
-            font-size: 9vw; line-height: 0.9; letter-spacing: -1px;
-            color: var(--text-main); margin-bottom: 30px;
+            font-size: 6.5vw; /* Оптимальный размер для двух строк */
+            line-height: 1.05; 
+            letter-spacing: -1px;
+            color: var(--text-main); 
+            margin-bottom: 30px;
         }
 
         .hero-desc {
             font-size: 18px; color: var(--text-muted);
-            max-width: 500px; margin-bottom: 40px;
+            max-width: 480px; margin-bottom: 40px;
         }
 
         .hero-actions { display: flex; align-items: center; gap: 30px; }
@@ -124,8 +144,13 @@
         }
         .btn-download:hover { color: var(--text-muted); }
 
+        /* Плашка с рейтингом справа внизу */
         .hero-badge {
-            position: absolute; right: 50px; bottom: 15%; z-index: 3; text-align: right;
+            position: absolute; 
+            right: 50px; 
+            bottom: 15%; 
+            z-index: 3; 
+            text-align: right;
         }
         .hero-badge .available {
             font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 5px;
@@ -137,64 +162,34 @@
         /* --- БЛОК СТАТИСТИКИ (ПОЛУМАТОВОЕ СТЕКЛО) --- */
         .stats-section {
             padding: 0 40px;
-            margin-top: -80px; /* Поднимаем выше, чтобы наехать на фото */
+            margin-top: -80px; 
             position: relative;
             z-index: 10;
         }
         
         .stats-box {
-            /* Полупрозрачный темный фон */
             background: rgba(25, 25, 25, 0.4);
-            
-            /* Эффект сильного размытия */
             backdrop-filter: blur(25px) saturate(150%);
             -webkit-backdrop-filter: blur(25px) saturate(150%);
-            
-            /* Тонкие светлые границы для эффекта стекла */
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-top: 1px solid rgba(255, 255, 255, 0.3); /* Блик сверху */
-            
+            border-top: 1px solid rgba(255, 255, 255, 0.3); 
             border-radius: 20px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             padding: 40px;
-            
-            /* Легкая тень для объема */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .stat-item {
             text-align: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.1); /* Более светлая линия */
+            border-right: 1px solid rgba(255, 255, 255, 0.1); 
         }
         .stat-item:last-child { border-right: none; }
         
-        .stat-icon { 
-            font-size: 24px; 
-            margin-bottom: 15px; 
-            color: var(--text-main); 
-            /* Легкое свечение иконкам */
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        
-        .stat-number { 
-            font-family: var(--font-heading); 
-            font-size: 48px; 
-            line-height: 1; 
-            margin-bottom: 5px; 
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-        
+        .stat-icon { font-size: 24px; margin-bottom: 15px; color: var(--text-main); text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+        .stat-number { font-family: var(--font-heading); font-size: 48px; line-height: 1; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
         .stat-number.text-val { font-size: 36px; }
-
-        .stat-label { 
-            font-size: 12px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            color: #cccccc; 
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-        }
+        .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #cccccc; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); }
 
         /* --- СЕКЦИЯ УСЛУГ --- */
         .services-section { padding: 100px 0; }
@@ -297,14 +292,15 @@
         .modal-submit { width: 100%; margin-top: 30px; padding: 18px; font-size: 15px; }
 
         /* --- АДАПТИВ --- */
+        @media (max-width: 1200px) {
+            .hero h1 { font-size: 8vw; }
+        }
         @media (max-width: 1024px) {
-            .hero h1 { font-size: 12vw; }
             .hero-content { width: 100%; }
-            .hero-bg { width: 100%; mask-image: linear-gradient(to bottom, transparent, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%); opacity: 0.3; }
-            
+            .hero-bg { width: 100%; mask-image: linear-gradient(to bottom, transparent 0%, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); opacity: 0.4; }
+            .hero h1 { font-size: 10vw; }
             .stats-box { grid-template-columns: repeat(2, 1fr); gap: 30px; padding: 30px; }
             .stat-item:nth-child(2) { border-right: none; }
-            
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .cta-box { flex-direction: column; align-items: flex-start; gap: 40px; padding: 40px; }
             .cta-contact-info { border-left: none; padding-left: 0; }
@@ -312,14 +308,12 @@
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
             .nav-links { display: none; }
-            .hero h1 { font-size: 16vw; }
+            .hero h1 { font-size: 14vw; }
             .hero-actions { flex-direction: column; align-items: flex-start; }
-            
             .stats-section { padding: 0 20px; margin-top: -40px; }
             .stats-box { grid-template-columns: 1fr; padding: 20px; }
             .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
             .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
-            
             .services-grid { grid-template-columns: 1fr; }
             .cta-content h2 { font-size: 2.5rem; }
             .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
@@ -353,6 +347,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-subtitle">ПРЕМИАЛЬНЫЙ САЛОН КРАСОТЫ</div>
+                <!-- Разбивка на 2 строки для идеального баланса -->
                 <h1>ИСКУССТВО<br>В ДЕТАЛЯХ</h1>
                 <p class="hero-desc">«Искусство Красоты» — для тех, кто ценит простоту и качество. Профессиональный уход в атмосфере премиального комфорта.</p>
                 
@@ -375,7 +370,7 @@
         </div>
     </section>
 
-    <!-- БЛОК СТАТИСТИКИ (В СТИЛЕ СТЕКЛА) -->
+    <!-- БЛОК СТАТИСТИКИ -->
     <section class="stats-section">
         <div class="stats-box">
             <div class="stat-item">
