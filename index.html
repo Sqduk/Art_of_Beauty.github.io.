@@ -517,10 +517,10 @@
     <script>
         // Открытие модального окна с предвыбором услуги
         function openModal(serviceName = null) {
-            // Снимаем все галочки
+            // Снимаем все галочки перед открытием
             document.querySelectorAll('input[name="service"]').forEach(chk => chk.checked = false);
             
-            // Если передано имя услуги, ставим галочку
+            // Если передано имя услуги, ставим галочку на нужном чекбоксе
             if (serviceName) {
                 document.querySelectorAll('input[name="service"]').forEach(chk => {
                     if (chk.value === serviceName) {
@@ -529,10 +529,9 @@
                 });
             }
             document.getElementById('bookingModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Блокируем скролл
+            document.body.style.overflow = 'hidden'; // Блокируем скролл фона
         }
 
         // Закрытие модального окна
         function closeModal() {
-            document.getElementById('bookingModal').classList.remove('active');
-            document.body.style.overflow = ''
+            document.getElementById
